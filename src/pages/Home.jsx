@@ -1,3 +1,4 @@
+import { Link } from "react-router";
 import Banner from "../components/Banner";
 import Card1 from "../ShareingPage/Card1";
 import CommunityVoices from "../ShareingPage/CommunityVoices";
@@ -19,9 +20,9 @@ const Home = () => {
           </p>
           <Card1></Card1>
           <div className="mt-10 text-center">
-            <button className=" cursor-pointer text-white px-6 py-3 rounded-lg bg-[#ad2d2b] hover:bg-[#D32F2F] transition">
+            <Link to={'/available-food'} className=" cursor-pointer text-white px-6 py-3 rounded-lg bg-[#ad2d2b] hover:bg-[#D32F2F] transition">
               Show All Foods
-            </button>
+            </Link>
           </div>
         </div>
       </div>

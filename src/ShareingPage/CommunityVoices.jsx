@@ -13,17 +13,17 @@ const CommunityVoices = () => {
         <div className="bg-gray-50 p-6 rounded-2xl shadow-md hover:shadow-lg transition">
           <div className="text-green-600 text-3xl mb-4">❝</div>
           <p className="text-gray-700 italic mb-4">
-            "NourishNet has been a blessing. As a single mother, getting extra help with groceries makes a huge difference. The donors are so kind and the process is simple."
+            "FoodBond has been a blessing. As a single mother, getting extra help with groceries makes a huge difference. The donors are so kind and the process is simple."
           </p>
           <div className="flex items-center justify-center mt-4">
             <img
-              src="https://i.pravatar.cc/100?img=47"
-              alt="Sarah L."
+              src="https://i.ibb.co/35jGRWmS/461494518-3927053130903991-1669048447871862858-n.jpg"
+              alt="Jhankar Mahbub."
               className="w-12 h-12 rounded-full mr-3"
             />
             <div>
-              <p className="font-semibold text-gray-800">Sarah L.</p>
-              <p className="text-sm text-gray-500">Community Member</p>
+              <p className="font-semibold text-gray-800">Jhankar Mahbub</p>
+              <p className="text-sm text-gray-500">Community Owner </p>
             </div>
           </div>
         </div>
@@ -36,13 +36,13 @@ const CommunityVoices = () => {
           </p>
           <div className="flex items-center justify-center mt-4">
             <img
-              src="https://i.pravatar.cc/100?img=12"
-              alt="Tom B."
+              src="https://i.ibb.co/vC1Y0pv8/503000915-1434993311149206-7079839493590208667-n.jpg"
+              alt="KH.Bidyut"
               className="w-12 h-12 rounded-full mr-3"
             />
             <div>
-              <p className="font-semibold text-gray-800">Tom B.</p>
-              <p className="text-sm text-gray-500">Food Donor</p>
+              <p className="font-semibold text-gray-800">KH.Bidyut</p>
+              <p className="text-sm text-gray-500">Community Member</p>
             </div>
           </div>
         </div>
