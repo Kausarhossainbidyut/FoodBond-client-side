@@ -12,7 +12,6 @@ const Register = () => {
   const goTo = useNavigate();
   const { createUser, setUser, updateUser } = useContext(AuthContext);
 
-  // ✅ Password Validation Function
   const isValidPassword = (password) => {
     const hasUpperCase = /[A-Z]/.test(password);
     const hasLowerCase = /[a-z]/.test(password);
@@ -33,7 +32,7 @@ const Register = () => {
     return true;
   };
 
-  // ✅ Form Submit Handler
+  //  Form Submit Handler
   const handleSubmit = (e) => {
     e.preventDefault();
     const form = e.target;
@@ -86,7 +85,7 @@ const Register = () => {
             <Title>Join with Us</Title>
           </div>
 
-          <div className="flex justify-between items-center gap-5 pt-8">
+          <div className="flex flex-col-reverse md:flex-row justify-between items-center gap-5 pt-8">
             {/* Form Area */}
             <div className="login-for flex-1">
               <form
@@ -156,10 +155,11 @@ const Register = () => {
                   </Link>
                 </p>
               </form>
+              <Social />
             </div>
 
             {/* Social Login */}
-            <Social />
+            
 
             {/* Lottie Animation */}
             <div className="lottie flex-1 flex mx-20">

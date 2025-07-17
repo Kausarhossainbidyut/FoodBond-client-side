@@ -7,9 +7,9 @@ const FoodDetails = () => {
       <div className="max-w-5xl mx-auto">
         {/* Back Link */}
         <Link to={'/available-food'}
-          className="text-sm text-gray-500 flex items-center gap-1 mb-4 hover:text-green-600 transition"
+          className="text-[24px] font-bold text-gray-500 flex items-center gap-1 mb-4 hover:text-green-600 transition"
         >
-          ← Back to Available Foods
+         <span className='text-4xl'> ←</span>Back to Available Foods
         </Link>
 
         {/* Food Item */}

@@ -51,7 +51,7 @@ const Login = () => {
             <Title>Login Now</Title>
           </div>
 
-          <div className="flex justify-between items-center gap-5 pt-8">
+          <div className="flex flex-col-reverse md:flex-row justify-between items-center gap-5 pt-8">
             <div className="login-for flex-1">
               <form
                 onSubmit={handleSubmit}
