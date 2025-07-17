@@ -1,6 +1,7 @@
 import React from "react";
 import { IoLocationOutline } from "react-icons/io5";
 import { CiClock1 } from "react-icons/ci";
+import { Link } from "react-router";
 
 const Card1 = () => {
   return (
@@ -39,9 +40,9 @@ const Card1 = () => {
         <p className="text-sm text-gray-600 mb-4">
           Various canned vegetables, fruits, and soups. Long shelf life.
         </p>
-        <button className="bg-green-600 cursor-pointer text-white w-full py-2 rounded-lg hover:bg-green-700 transition">
-          View Details
-        </button>
+        <Link to={'/food-details'} >
+          <button className="bg-green-600 cursor-pointer text-white w-full py-2 rounded-lg hover:bg-green-700 transition">View Details</button>
+        </Link>
       </div>
 
 

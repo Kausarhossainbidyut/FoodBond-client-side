@@ -50,7 +50,7 @@ const AddFood = () => {
           <input
             type="url"
             name="foodImage"
-            placeholder="e.g., https://example.com/soup.jpg"
+            placeholder="Enter food image url..."
             className="w-full border rounded-lg px-3 py-2 text-sm"
             required
           />
@@ -65,7 +65,7 @@ const AddFood = () => {
               type="number"
               name="quantity"
               min="1"
-              placeholder="e.g., 5"
+              placeholder="Give here quantity of food.."
               className="w-full border rounded-lg px-3 py-2 text-sm"
               required
             />
@@ -73,7 +73,7 @@ const AddFood = () => {
 
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">
-              Expiration
+              Expiration Date
             </label>
             <input
               type="date"
@@ -113,7 +113,7 @@ const AddFood = () => {
           type="submit"
           className="w-full bg-green-600 hover:bg-green-700 text-white rounded-lg py-2 text-sm font-medium"
         >
-         Add Food
+          Add Food
         </button>
       </form>
     </div>
