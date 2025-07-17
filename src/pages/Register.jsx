@@ -32,16 +32,14 @@ const Register = () => {
     return true;
   };
 
-  //  Form Submit Handler
   const handleSubmit = (e) => {
     e.preventDefault();
     const form = e.target;
     const name = form.name.value;
-    const image = form.image.value; // used as photoURL
+    const image = form.image.value;
     const email = form.email.value;
     const pass = form.pass.value;
 
-    // Validate password
     if (!isValidPassword(pass)) return;
 
     createUser(email, pass)
@@ -54,46 +52,40 @@ const Register = () => {
           });
         });
       })
-      
       .catch((err) => {
-        console.log(err.code); // Debugging purpose
-
         if (err.code === "auth/email-already-in-use") {
           Swal.fire({
             title: "Already Registered",
             text: "This email is already registered. Please go to login.",
             icon: "warning",
-            confirmButtonText: "Go to Login"
+            confirmButtonText: "Go to Login",
           }).then((result) => {
             if (result.isConfirmed) {
-              navigate("/login"); // Redirect to Login page
+              navigate("/login");
             }
           });
-
         } else {
           Swal.fire("Registration Failed", err.message, "error");
         }
       });
-
   };
 
   return (
     <div className="bg-[url(/bg.png)] bg-contain">
       <div className="bg-white bg-opacity-90 min-h-screen">
-        <div className="w-11/12 mx-auto py-10 m-5 p-5">
+        <div className="w-11/12 mx-auto py-10">
           <div className="title mt-5">
             <Title>Join with Us</Title>
           </div>
 
-          <div className="flex flex-col-reverse md:flex-row justify-between items-center gap-5 pt-8">
+          <div className="flex flex-col-reverse lg:flex-row justify-between items-center gap-10 pt-8">
             {/* Form Area */}
-            <div className="login-for flex-1">
+            <div className="w-full lg:w-1/2">
               <form
                 onSubmit={handleSubmit}
                 className="bg-white p-5 flex flex-col gap-8 backdrop-blur-sm bg-opacity-10 shadow-lg rounded-lg"
               >
-                {/* Name Input */}
-                <div className="flex justify-start items-center">
+                <div className="flex items-center">
                   <BiUser className="text-3xl text-slate-500" />
                   <input
                     className="outline-none flex-1 border-b-2 p-2 bg-transparent focus:border-orange-400 transition-all duration-200"
@@ -104,8 +96,7 @@ const Register = () => {
                   />
                 </div>
 
-                {/* Image URL Input */}
-                <div className="flex justify-start items-center">
+                <div className="flex items-center">
                   <BiImageAdd className="text-3xl text-slate-500" />
                   <input
                     className="outline-none flex-1 border-b-2 p-2 bg-transparent focus:border-orange-400 transition-all duration-200"
@@ -116,8 +107,7 @@ const Register = () => {
                   />
                 </div>
 
-                {/* Email Input */}
-                <div className="flex justify-start items-center">
+                <div className="flex items-center">
                   <BiEnvelope className="text-3xl text-slate-500" />
                   <input
                     className="outline-none flex-1 border-b-2 p-2 bg-transparent focus:border-orange-400 transition-all duration-200"
@@ -128,8 +118,7 @@ const Register = () => {
                   />
                 </div>
 
-                {/* Password Input */}
-                <div className="flex justify-start items-center">
+                <div className="flex items-center">
                   <BiKey className="text-3xl text-slate-500" />
                   <input
                     className="outline-none flex-1 border-b-2 p-2 bg-transparent focus:border-orange-400 transition-all duration-200"
@@ -140,14 +129,12 @@ const Register = () => {
                   />
                 </div>
 
-                {/* Submit Button */}
                 <input
                   type="submit"
                   value="Register Now"
                   className="bg-[#E53935] hover:bg-[#D32F2F] text-white font-semibold py-2 px-4 rounded transition duration-300"
                 />
 
-                {/* Login Page Link */}
                 <p className="text-center pt-2 text-sm text-gray-600">
                   Already have an account?{" "}
                   <Link to="/login" className="text-blue-600 hover:underline">
@@ -158,11 +145,8 @@ const Register = () => {
               <Social />
             </div>
 
-            {/* Social Login */}
-            
-
             {/* Lottie Animation */}
-            <div className="lottie flex-1 flex mx-20">
+            <div className="w-full lg:w-1/2 max-w-md mx-auto">
               <Lottie animationData={happy} />
             </div>
           </div>
