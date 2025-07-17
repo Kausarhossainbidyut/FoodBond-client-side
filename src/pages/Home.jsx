@@ -9,13 +9,27 @@ import Product from "./Product";
 const Home = () => {
   return (
     <>
-      {/* <Banner></Banner> */}
       <Product></Product>
-      <Card1></Card1>
+      {/* <Banner></Banner> */}
+      <div className="bg-[#ecd5d580] py-[40px] ]  px-4">
+        <div className=" mx-auto">
+          <h1 className="text-3xl font-bold text-center mb-2">Featured Foods</h1>
+          <p className="text-center text-gray-600 mb-10">
+            Freshly added and abundant meals waiting for you.
+          </p>
+          <Card1></Card1>
+          <div className="mt-10 text-center">
+            <button className=" cursor-pointer text-white px-6 py-3 rounded-lg bg-[#ad2d2b] hover:bg-[#D32F2F] transition">
+              Show All Foods
+            </button>
+          </div>
+        </div>
+      </div>
+
+
       <HowItWorks></HowItWorks>
       <CommunityVoices></CommunityVoices>
       <JoinMission></JoinMission>
-      <Footer></Footer>
     </>
   );
 };

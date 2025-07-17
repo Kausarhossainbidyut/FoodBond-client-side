@@ -4,14 +4,20 @@ import {
   FaFacebookF,
   FaInstagram,
 } from "react-icons/fa";
+import { NavLink } from "react-router";
 
 const Footer = () => {
   return (
-    <footer className="bg-gray-100 text-gray-700 pt-12 pb-6 mt-20">
+    <footer className="bg-gray-200 text-gray-700  mt-[10px] pb-6 pt-20">
       <div className="max-w-7xl mx-auto px-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-10">
         {/* Brand Info */}
         <div>
-          <h2 className="text-2xl font-bold text-green-600 mb-3">NourishNet</h2>
+          <div className="flex items-center">
+            <img className="w-[60px] h-[60px]" src="https://i.ibb.co/YT4cqW4V/Whats-App-Image-2025-07-16-at-03-44-14-43bc9fb4-removebg-preview.png" alt="logo" />
+
+              <NavLink to={'/'} className="text-2xl font-bold text-[#E53935]">Food<span className='text-[#3949AB]'>Bond</span></NavLink>
+          
+          </div>
           <p className="text-sm leading-relaxed">
             Reducing food waste, one meal at a time.
             Join our community to share surplus food and help those in need.
@@ -57,7 +63,8 @@ const Footer = () => {
 
       {/* Bottom Footer */}
       <div className="mt-10 border-t pt-5 text-center text-sm text-gray-500">
-        © 2025 NourishNet. All Rights Reserved.
+        © 2025 FoodBond
+        . All Rights Reserved.
       </div>
     </footer>
   );

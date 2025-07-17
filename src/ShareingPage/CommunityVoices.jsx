@@ -2,12 +2,12 @@ import React from "react";
 
 const CommunityVoices = () => {
   return (
-    <section className="bg-[#ebebeb80] mt-8 py-12 px-4 text-center">
+    <section className="bg-[#dedada80]  py-12 px-4 text-center">
       <h2 className="text-3xl font-bold mb-2 text-gray-800">Voices of Our Community</h2>
       <p className="text-gray-600 mb-10">
         See what people are saying about their NourishNet experience.
       </p>
-      <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+      <div className="grid md:grid-cols-2 gap-8 mx-auto px-5">
 
         {/* Testimonial 1 */}
         <div className="bg-gray-50 p-6 rounded-2xl shadow-md hover:shadow-lg transition">

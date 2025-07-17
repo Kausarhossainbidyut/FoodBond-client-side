@@ -3,14 +3,14 @@ import { FaUtensils, FaHandshake, FaRecycle } from "react-icons/fa";
 
 const HowItWorks = () => {
   return (
-    <div className="mt-[100px] bg-[#8b313180] py-[50px]">
+    <div className=" bg-[#f5efef80] py-[50px]">
       <section className="py-12 px-4 text-center">
         <h2 className="text-3xl font-bold text-gray-800 mb-2">How It Works</h2>
         <p className="text-gray-600 mb-10 max-w-xl mx-auto">
           Sharing food is simple and rewarding. Follow these three easy steps to make a difference.
         </p>
 
-        <div className="grid md:grid-cols-3 gap-10 max-w-6xl mx-auto">
+        <div className="grid md:grid-cols-3 gap-10  mx-auto">
           {/* Step 1 */}
           <div className="flex flex-col items-center space-y-4">
             <div className="bg-green-100 rounded-full p-4">
