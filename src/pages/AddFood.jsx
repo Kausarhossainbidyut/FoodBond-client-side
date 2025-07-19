@@ -14,6 +14,8 @@ const AddFood = () => {
     const formData = new FormData(form)
     const data = Object.fromEntries(formData.entries())
      data.ownerEmail = user.email;
+     data.ownerName=user.displayName;
+     data.ownerImage=user.photoURL;
      data.status = "available";
     console.log(data);
     
