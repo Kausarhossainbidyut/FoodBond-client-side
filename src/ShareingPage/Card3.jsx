@@ -7,7 +7,7 @@ import {
     FaTrash,
 } from 'react-icons/fa';
 
-const Card3 = ({ food = {} }) => {
+const Card3 = ({ food = {}, handleRequest }) => {
 
 
     const { foodName,
@@ -54,9 +54,13 @@ const Card3 = ({ food = {} }) => {
                             Status: <span className="font-semibold text-black ml-1">{status}</span>
                         </p>
                     </div>
-                    <button className="flex mt-3 cursor-pointer items-center gap-1 px-3 py-1.5 rounded-md bg-red-500 hover:bg-red-600 text-white text-sm transition">
+                    <button
+                        onClick={() => handleRequest(food._id)}
+                        className="flex mt-3 cursor-pointer items-center gap-1 px-3 py-1.5 rounded-md bg-red-500 hover:bg-red-600 text-white text-sm transition"
+                    >
                         <FaTrash className="w-4 h-4" /> Cancel Request
                     </button>
+
                 </div>
             </div>
 

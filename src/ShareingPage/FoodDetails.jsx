@@ -26,7 +26,7 @@ const FoodDetails = () => {
     axios
       .patch(
         `http://localhost:5000/request/${_id}`,
-        { userNotes: userNote }, // request body
+        { userNotes: userNote }, 
         {
           headers: {
             Authorization: `Bearer ${user.accessToken}`
