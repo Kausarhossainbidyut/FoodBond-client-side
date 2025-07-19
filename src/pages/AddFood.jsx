@@ -1,23 +1,29 @@
+import axios from 'axios';
 import React from 'react';
+import { useContext } from 'react';
+import { AuthContext } from '../providers/AuthProvider';
 
 const AddFood = () => {
+
+  const {user} = useContext(AuthContext)
+ console.log(user);
+ 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const formData = new FormData(e.target);
+    const form = e.target;
+    const formData = new FormData(form)
+    const data = Object.fromEntries(formData.entries())
+     data.ownerEmail = user.email;
+     data.status = "available";
+    console.log(data);
+    
+    axios.post("http://localhost:5000/add-food", data)
+    .then(res =>{
+      console.log("axios res:",res);
+      
+    })
 
-    const quantity = parseInt(formData.get("quantity"));
-    if (quantity < 1) {
-      alert("❗ Quantity must be at least 1");
-      return;
-    }
-
-    console.log("Food Name:", formData.get("foodName"));
-    console.log("Image URL:", formData.get("foodImage"));
-    console.log("Quantity:", quantity);
-    console.log("Expiration Date:", formData.get("expirationDate"));
-    console.log("Pickup Location:", formData.get("location"));
-    console.log("Notes:", formData.get("notes"));
-    // TODO: Add your submission logic here
+   
   };
 
   return (
