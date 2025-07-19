@@ -10,6 +10,7 @@ import ManageMyFood from "../pages/ManageMyFood";
 import MyFoodRequest from "../pages/MyFoodRequest";
 import FoodDetails from "../ShareingPage/FoodDetails";
 import axios from "axios";
+import EditData from "../ShareingPage/EditData";
 
 const mainRoutes = createBrowserRouter([
   {
@@ -36,6 +37,10 @@ const mainRoutes = createBrowserRouter([
       {
         path: "/add-food",
         element: <AddFood></AddFood>,
+      },
+      {
+        path: "/edit",
+        element: <EditData></EditData>,
       },
       {
         path: "login",
