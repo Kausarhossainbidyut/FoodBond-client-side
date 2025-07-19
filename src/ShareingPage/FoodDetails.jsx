@@ -1,7 +1,27 @@
 import React from 'react';
-import { Link } from 'react-router';
+import { Link, useLoaderData } from 'react-router';
+import { AuthContext } from '../providers/AuthProvider';
+import { useContext } from 'react';
 
 const FoodDetails = () => {
+
+  const { user } = useContext(AuthContext);
+
+  const data = useLoaderData()
+  const { foodName,
+    foodImage,
+    quantity,
+    expirationDate,
+    location,
+    notes,
+    donorEmail,
+    donorName,
+    donorImage,
+    status
+
+  } = data;
+
+
   return (
     <div className="min-h-screen bg-gray-50 px-4 py-6">
       <div className="max-w-5xl mx-auto">
@@ -9,7 +29,7 @@ const FoodDetails = () => {
         <Link to={'/available-food'}
           className="text-[24px] font-bold text-gray-500 flex items-center gap-1 mb-4 hover:text-green-600 transition"
         >
-         <span className='text-4xl'> ←</span>Back to Available Foods
+          <span className='text-4xl'> ←</span>Back to Available Foods
         </Link>
 
         {/* Food Item */}
@@ -17,9 +37,9 @@ const FoodDetails = () => {
           {/* Food Image */}
           <div className="md:w-1/2">
             <img
-              src="https://i.ibb.co/1GC8r7wD/chicken-skewers-with-slices-apples-chili.jpg"
-              alt="Fresh Garden Salad"
-              className="w-full h-full object-cover"
+              src={foodImage}
+              alt="foodImage"
+              className="w-full h-[300px] md:h-[400px] bg-cover"
             />
           </div>
 
@@ -27,21 +47,28 @@ const FoodDetails = () => {
           <div className="md:w-1/2 p-6 flex flex-col justify-between">
             <div>
               <h1 className="text-2xl font-bold text-gray-800 mb-2">
-                Fresh Garden Salad
+                {foodName}
               </h1>
               <p className="text-sm text-gray-500 mb-4">
-                Donated by <span className="font-semibold text-green-700">Alice Johnson</span>
+                Donor Name: <span className="font-semibold text-green-700">{donorName}</span>
               </p>
+              <p className="text-sm text-gray-500 mb-4">
+                Donor Email: <span className="font-semibold text-green-700">{donorEmail}</span>
+              </p>
+              <p className="text-sm text-gray-500 mb-4">
+                User Email: <span className="font-semibold text-green-700">{user?.displayName}</span>
+              </p>
+
 
               <div className="space-y-3 text-sm text-gray-700">
                 <div className="flex items-center gap-2">
-                  🥗 <span className="font-medium">Quantity:</span> 15 servings
+                  🥗 <span className="font-medium">Quantity:</span> {quantity}
                 </div>
                 <div className="flex items-center gap-2">
-                  📍 <span className="font-medium">Pickup Location:</span> Downtown Community Center
+                  📍 <span className="font-medium">Pickup Location:</span> {location}
                 </div>
                 <div className="flex items-center gap-2">
-                  ⏳ <span className="font-medium">Expires:</span> July 19, 2025
+                  ⏳ <span className="font-medium">Expires:</span> {expirationDate}
                 </div>
               </div>
 
@@ -50,8 +77,8 @@ const FoodDetails = () => {
                   Additional Notes
                 </h2>
                 <p className="text-sm text-gray-600 leading-relaxed">
-                  Mixed greens with cherry tomatoes, cucumbers, and a light vinaigrette.
-                  Perfect for a healthy lunch or dinner.
+                  <textarea className="textarea" defaultValue={notes}  placeholder="Bio"></textarea>
+                  
                 </p>
               </div>
             </div>

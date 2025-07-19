@@ -6,8 +6,24 @@ import HowItWorks from "../ShareingPage/HowWorkCard";
 import JoinMission from "../ShareingPage/JoinMission";
 import Footer from "./Footer";
 import Product from "./Product";
+import { useState } from "react";
+import { useEffect } from "react";
+import axios from "axios";
 
 const Home = () => {
+
+  const [foods, setFoods] = useState([])
+
+  useEffect(() => {
+    axios.get("http://localhost:5000/featured-foods")
+      .then(res => {
+        setFoods(res.data)
+      })
+      .catch(error => console.log(error));
+
+
+  }, [])
+
   return (
     <>
       <Product></Product>
@@ -18,7 +34,12 @@ const Home = () => {
           <p className="text-center text-gray-600 mb-10">
             Freshly added and abundant meals waiting for you.
           </p>
-          <Card1></Card1>
+          <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-6 ">
+
+            {
+              foods.map(food => <Card1 food={food} key={food._id}></Card1>)
+            }
+          </div>
           <div className="mt-10 text-center">
             <Link to={'/available-food'} className=" cursor-pointer text-white px-6 py-3 rounded-lg bg-[#ad2d2b] hover:bg-[#D32F2F] transition">
               Show All Foods

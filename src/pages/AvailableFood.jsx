@@ -1,8 +1,25 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Card1 from '../ShareingPage/Card1';
 import { FaSearch } from 'react-icons/fa';
+import { useEffect } from 'react';
+import axios from 'axios';
 
 const AvailableFood = () => {
+
+  const [foods, setFoods] = useState([])
+
+  useEffect(() => {
+    axios.get("http://localhost:5000/available-food")
+      .then(res => {
+        setFoods(res.data)
+      })
+      .catch(error => console.log(error));
+
+
+  }, [])
+
+
+
   return (
     <div className="bg-[#ffffff] w-full">
       <div className="max-w-7xl mx-auto px-4 md:px-8 md:py-16">
@@ -24,12 +41,19 @@ const AvailableFood = () => {
           <button
             className="bg-green-600  text-[18px] flex justify-center items-center text-white px-5 py-2 h-10  rounded-md hover:bg-green-700 cursor-pointer transition text-sm  md:w-[150px]"
           >
-           <FaSearch size={14}/> <span className='pl-1'>Search</span>
+            <FaSearch size={14} /> <span className='pl-1'>Search</span>
           </button>
         </div>
+        <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-6 ">
 
-        {/* Cards */}
-        <Card1 />
+
+          {
+            foods.map(food => <Card1 food={food} key={food._id}></Card1>)
+          }
+
+
+        </div>
+
       </div>
     </div>
   );

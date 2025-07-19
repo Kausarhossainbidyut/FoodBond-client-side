@@ -2,30 +2,40 @@ import axios from 'axios';
 import React from 'react';
 import { useContext } from 'react';
 import { AuthContext } from '../providers/AuthProvider';
+import Swal from 'sweetalert2';
 
 const AddFood = () => {
 
-  const {user} = useContext(AuthContext)
- console.log(user);
- 
+  const { user } = useContext(AuthContext)
+  console.log(user);
+
   const handleSubmit = (e) => {
     e.preventDefault();
     const form = e.target;
     const formData = new FormData(form)
     const data = Object.fromEntries(formData.entries())
-     data.ownerEmail = user.email;
-     data.ownerName=user.displayName;
-     data.ownerImage=user.photoURL;
-     data.status = "available";
+    data.donorEmail = user.email;
+    data.donorName = user.displayName;
+    data.donorImage = user.photoURL;
+    data.status = "available";
     console.log(data);
-    
-    axios.post("http://localhost:5000/add-food", data)
-    .then(res =>{
-      console.log("axios res:",res);
-      
-    })
 
-   
+    axios.post("http://localhost:5000/add-food", data)
+      .then(res => {
+        console.log("axios res:", res);
+        if (res.data.insertedId) {
+          Swal.fire({
+            title: "Food add successfully!",
+            icon: "success",
+            draggable: true
+          });
+        }
+      })
+      .catch(error =>{
+        console.log(error);
+      })
+
+
   };
 
   return (
