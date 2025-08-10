@@ -12,7 +12,7 @@ const slides = [
   { type: 'video', src: video3 },
   { type: 'video', src: video2 },
   { type: 'video', src: video1 },
-  { type: 'image', src: video1 }, // fallback image from video1 for now
+  { type: 'image', src: video1 }, 
 ];
 
 const Product = () => {
@@ -42,6 +42,8 @@ const Product = () => {
                 muted
                 loop
                 playsInline
+                preload="metadata"
+                poster={video1}  
               />
             )}
           </SwiperSlide>
