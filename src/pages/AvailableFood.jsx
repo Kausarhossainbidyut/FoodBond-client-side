@@ -1,27 +1,26 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Card1 from '../ShareingPage/Card1';
 import { FaSearch } from 'react-icons/fa';
-import { useEffect } from 'react';
 import axios from 'axios';
 
 const AvailableFood = () => {
-
-  const [foods, setFoods] = useState([])
+  const [foods, setFoods] = useState([]);
+  const [searchTerm, setSearchTerm] = useState('');
 
   useEffect(() => {
-  axios.get("http://localhost:5000/available-food")
-    .then(res => {
-      // response handle করুন
-      setFoods(res.data);
+    // প্রথম লোডে সব খাবার দেখাবে
+    axios.get("http://localhost:5000/available-food")
+      .then(res => setFoods(res.data))
+      .catch(err => console.error(err));
+  }, []);
+
+  const handleSearch = () => {
+    axios.get('http://localhost:5000/available-food', {
+      params: { foodName: searchTerm }
     })
-    .catch(err => {
-      // error handle করুন
-      console.error(err);
-    });
-}, []);
-
-
-
+    .then(res => setFoods(res.data))
+    .catch(err => console.error(err));
+  };
 
   return (
     <div className="bg-[#ffffff] w-full">
@@ -35,28 +34,26 @@ const AvailableFood = () => {
         </p>
 
         {/* Search Bar */}
-        <div className="flex  sm:mx-3.5 flex-row items-center justify-center gap-4 mb-12 w-full">
+        <div className="flex sm:mx-3.5 flex-row items-center justify-center gap-4 mb-12 w-full">
           <input
             type="text"
             placeholder="Search by food name..."
             className="w-full sm:w-[60%] md:w-[40%] bordr bg-[#eee9e9] h-10 px-4 text-sm border border-black rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-green-400 transition"
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
           />
           <button
-            className="bg-green-600  text-[18px] flex justify-center items-center text-white px-5 py-2 h-10  rounded-md hover:bg-green-700 cursor-pointer transition text-sm  md:w-[150px]"
+            className="bg-green-600 text-[18px] flex justify-center items-center text-white px-5 py-2 h-10 rounded-md hover:bg-green-700 cursor-pointer transition text-sm md:w-[150px]"
+            onClick={handleSearch}
           >
             <FaSearch size={14} /> <span className='pl-1'>Search</span>
           </button>
         </div>
-        <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-6 ">
 
-
-          {
-            foods.map(food => <Card1 food={food} key={food._id}></Card1>)
-          }
-
-
+        {/* Food Cards */}
+        <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-6">
+          {foods.map(food => <Card1 food={food} key={food._id} />)}
         </div>
-
       </div>
     </div>
   );
