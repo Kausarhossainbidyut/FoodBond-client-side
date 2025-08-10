@@ -9,6 +9,7 @@ import Product from "./Product";
 import { useState } from "react";
 import { useEffect } from "react";
 import axios from "axios";
+import SalesPromotion from "../ShareingPage/SalesPromotion";
 
 const Home = () => {
 
@@ -53,6 +54,7 @@ const Home = () => {
 
 
       <HowItWorks></HowItWorks>
+      <SalesPromotion></SalesPromotion>
       <CommunityVoices></CommunityVoices>
       <JoinMission></JoinMission>
     </>
