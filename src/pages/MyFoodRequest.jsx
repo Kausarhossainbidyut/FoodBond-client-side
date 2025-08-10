@@ -9,6 +9,8 @@ const MyFoodRequest = () => {
   const { user } = useContext(AuthContext);
 
   useEffect(() => {
+    if (!user?.accessToken) return;
+
     axios
       .get("http://localhost:5000/my-food-request", {
         headers: { Authorization: `Bearer ${user.accessToken}` },
@@ -21,7 +23,7 @@ const MyFoodRequest = () => {
     axios
       .patch(
         `http://localhost:5000/cancel-request/${id}`,
-        { userNotes: "" }, // চাইলে নোট পাঠাতে পারো
+        { userNotes: "" },
         {
           headers: { Authorization: `Bearer ${user.accessToken}` },
         }
@@ -29,7 +31,6 @@ const MyFoodRequest = () => {
       .then((res) => {
         if (res.data.modifiedCount > 0) {
           Swal.fire("Cancelled!", "Your request has been cancelled.", "success");
-          // Remove canceled food from UI list
           setFoods((prevFoods) => prevFoods.filter((food) => food._id !== id));
         }
       })
@@ -48,11 +49,19 @@ const MyFoodRequest = () => {
         <p className="text-gray-600 mb-6">
           Track the status of food you've requested from the community.
         </p>
-        <div>
-          {foods.map((food) => (
-            <Card3 key={food._id} food={food} handleRequest={handleCancelRequest} />
-          ))}
-        </div>
+        
+        {foods.length === 0 ? (
+          <div className="text-center text-gray-500 py-20">
+            No food requests found. <br />
+            <span className="text-green-600 font-semibold">Make a request now!</span>
+          </div>
+        ) : (
+          <div>
+            {foods.map((food) => (
+              <Card3 key={food._id} food={food} handleRequest={handleCancelRequest} />
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );
