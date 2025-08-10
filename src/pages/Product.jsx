@@ -37,7 +37,7 @@ const Product = () => {
             ) : (
               <video
                 src={src}
-                className="w-full h-[200px] md:h-[400px] object-cover"
+                className="w-full h-[250px] md:h-[400px] object-cover"
                 autoPlay
                 muted
                 loop

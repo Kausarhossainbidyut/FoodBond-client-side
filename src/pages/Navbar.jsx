@@ -80,7 +80,7 @@ const Navbar = () => {
     }, [lastScrollTop, scrollTimeout]);
 
     return (
-        <div className={`fixed top-0 left-0 right-0 z-50 bg-gray-50 shadow-sm transition-all duration-500 ease-in-out ${showNavbar ? 'translate-y-0' : '-translate-y-full'}`}>
+        <div className={`fixed py-[3px] top-0 left-0 right-0 z-50 bg-gray-50 shadow-sm transition-all duration-500 ease-in-out ${showNavbar ? 'translate-y-0' : '-translate-y-full'}`}>
             {/* content container with horizontal padding, max width for consistent layout */}
             <div className="max-w-7xl mx-auto px-4 md:px-6 flex items-center justify-between h-16">
                 <div className="flex items-center space-x-4">
