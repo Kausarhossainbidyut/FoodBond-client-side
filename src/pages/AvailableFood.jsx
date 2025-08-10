@@ -6,21 +6,44 @@ import axios from 'axios';
 const AvailableFood = () => {
   const [foods, setFoods] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
+  const [loading, setLoading] = useState(true); // loading state যোগ
 
   useEffect(() => {
-    // প্রথম লোডে সব খাবার দেখাবে
+    setLoading(true);
     axios.get("http://localhost:5000/available-food")
-      .then(res => setFoods(res.data))
-      .catch(err => console.error(err));
+      .then(res => {
+        setFoods(res.data);
+        setLoading(false);
+      })
+      .catch(err => {
+        console.error(err);
+        setLoading(false);
+      });
   }, []);
 
   const handleSearch = () => {
+    setLoading(true);
     axios.get('http://localhost:5000/available-food', {
       params: { foodName: searchTerm }
     })
-    .then(res => setFoods(res.data))
-    .catch(err => console.error(err));
+    .then(res => {
+      setFoods(res.data);
+      setLoading(false);
+    })
+    .catch(err => {
+      console.error(err);
+      setLoading(false);
+    });
   };
+
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center min-h-screen">
+        <button className="btn btn-square loading"></button> 
+        {/* DaisyUI loading spinner */}
+      </div>
+    );
+  }
 
   return (
     <div className="bg-[#ffffff] w-full">
