@@ -8,6 +8,7 @@ import Title from "../components/Title";
 import { AuthContext } from "../providers/AuthProvider";
 import Swal from "sweetalert2";
 
+
 const Register = () => {
   const goTo = useNavigate();
   const { createUser, setUser, updateUser } = useContext(AuthContext);
@@ -71,7 +72,7 @@ const Register = () => {
   };
 
   return (
-    <div className="bg-[url(/bg.png)] bg-contain">
+    <div className="bg-contain">
       <div className="bg-white bg-opacity-90 min-h-screen">
         <div className="w-11/12 mx-auto py-10">
           <div className="title mt-5">

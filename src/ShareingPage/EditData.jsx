@@ -20,7 +20,7 @@ const EditData = () => {
     data.status = "available";
     console.log(data);
 
-    axios.post("http://localhost:5000/add-food", data)
+    axios.post("mission-scic-assignment.vercel.app/add-food", data)
       .then(res => {
         console.log("axios res:", res);
         if (res.data.insertedId) {

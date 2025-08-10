@@ -54,7 +54,8 @@ const mainRoutes = createBrowserRouter([
         path: '/food-details/:foodId',
         element: <FoodDetails></FoodDetails>,
         loader: async({params})=>{
-        const {data} = await axios.get(`http://localhost:5000/food-details/${params.foodId}`)
+        const {data} = await axios.get(`http://localhost:5000/
+food-details/${params.foodId}`)
         return data;
         }
       },

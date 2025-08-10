@@ -9,14 +9,17 @@ const AvailableFood = () => {
   const [foods, setFoods] = useState([])
 
   useEffect(() => {
-    axios.get("http://localhost:5000/available-food")
-      .then(res => {
-        setFoods(res.data)
-      })
-      .catch(error => console.log(error));
+  axios.get("http://localhost:5000/available-food")
+    .then(res => {
+      // response handle করুন
+      setFoods(res.data);
+    })
+    .catch(err => {
+      // error handle করুন
+      console.error(err);
+    });
+}, []);
 
-
-  }, [])
 
 
 

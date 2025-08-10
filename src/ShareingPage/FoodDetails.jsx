@@ -25,7 +25,8 @@ const FoodDetails = () => {
   const handleRequest = () => {
     axios
       .patch(
-        `http://localhost:5000/request/${_id}`,
+        `http://localhost:5000/
+request/${_id}`,
         { userNotes: userNote }, 
         {
           headers: {

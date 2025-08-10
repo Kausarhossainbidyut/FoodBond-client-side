@@ -1,118 +1,126 @@
-import React, { useEffect, useState, useContext } from 'react';
+import React, { useEffect, useState, useContext, useRef } from 'react';
 import { IoIosLogOut } from "react-icons/io";
 import { Link, NavLink } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import { AuthContext } from '../providers/AuthProvider';
 
 const Navbar = () => {
-    const { user, logOut } = useContext(AuthContext);
-    const [showNavbar, setShowNavbar] = useState(true);
-    const [lastScrollTop, setLastScrollTop] = useState(0);
-    const [scrollTimeout, setScrollTimeout] = useState(null);
+  const { user, logOut } = useContext(AuthContext);
+  const [showNavbar, setShowNavbar] = useState(true);
+  const [lastScrollTop, setLastScrollTop] = useState(0);
+  const [scrollTimeout, setScrollTimeout] = useState(null);
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const [showUserMenu, setShowUserMenu] = useState(false);
+  const userMenuRef = useRef(null);
 
-    const handleLogOut = () => {
-        logOut()
-            .then(() => {
-                Swal.fire({
-                    title: "Congratulation!",
-                    text: "LogOut Successful!",
-                    icon: "success"
-                });
-                console.log('logOUt successful');
-            })
-            .catch(error => {
-                console.log(error);
-            });
+  const handleLogOut = () => {
+    logOut()
+      .then(() => {
+        Swal.fire({
+          title: "Congratulation!",
+          text: "LogOut Successful!",
+          icon: "success"
+        });
+      })
+      .catch(error => console.log(error));
+  };
+
+  const linksPage = (
+    <>
+      <li>
+        <NavLink className={({ isActive }) => isActive ? "text-green-600 underline" : 'text-[#1E88E5] hover:text-orange-500'} to={"/"}>Home</NavLink>
+      </li>
+      <li>
+        <NavLink className={({ isActive }) => isActive ? "text-green-600 underline" : 'text-[#1E88E5] hover:text-orange-500'} to={'/available-food'}>Available Food</NavLink>
+      </li>
+      {user && (
+        <>
+          <li><NavLink className={({ isActive }) => isActive ? "text-green-600 underline" : 'text-[#1E88E5] hover:text-orange-500'} to={'/add-food'}>Add Food</NavLink></li>
+          <li><NavLink className={({ isActive }) => isActive ? "text-green-600 underline" : 'text-[#1E88E5] hover:text-orange-500'} to={'/manage-my-food'}>Manage My Food</NavLink></li>
+          <li><NavLink className={({ isActive }) => isActive ? "text-green-600 underline" : 'text-[#1E88E5] hover:text-orange-500'} to={'/my-food-request'}>My Food Request</NavLink></li>
+        </>
+      )}
+    </>
+  );
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const st = window.pageYOffset || document.documentElement.scrollTop;
+      if (st > lastScrollTop) setShowNavbar(false);
+      else setShowNavbar(true);
+      setLastScrollTop(st <= 0 ? 0 : st);
+      if (scrollTimeout) clearTimeout(scrollTimeout);
+      const timeout = setTimeout(() => setShowNavbar(true), 1000);
+      setScrollTimeout(timeout);
     };
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      if (scrollTimeout) clearTimeout(scrollTimeout);
+    };
+  }, [lastScrollTop, scrollTimeout]);
 
-    const linksPage = <>
-        <li className='text-[16px] text-[#1E88E5] font-medium hover:text-orange-500 '>
-            <NavLink className={({ isActive }) => isActive ? "text-green-600 underline" : ''} to={"/"}>Home</NavLink>
-        </li>
-        <li className='text-[16px] text-[#1E88E5] font-medium hover:text-orange-500'>
-            <NavLink className={({ isActive }) => isActive ? "text-green-600 underline" : ''} to={'/available-food'}>Available Food</NavLink>
-        </li>
-        {user &&
-            <>
-                <li className='text-[16px] text-[#1E88E5] font-medium hover:text-orange-500'>
-                    <NavLink className={({ isActive }) => isActive ? "text-green-600 underline" : ''} to={'/add-food'}>Add Food</NavLink>
-                </li>
-                <li className='text-[16px] text-[#1E88E5] font-medium hover:text-orange-500'>
-                    <NavLink className={({ isActive }) => isActive ? "text-green-600 underline" : ''} to={'/manage-my-food'}>Manage My Food</NavLink>
-                </li>
-                <li className='text-[16px] text-[#1E88E5] font-medium hover:text-orange-500'>
-                    <NavLink className={({ isActive }) => isActive ? "text-green-600 underline" : ''} to={'/my-food-request'}>My Food Request</NavLink>
-                </li>
-            </>
-        }
-    </>;
+  useEffect(() => {
+    function handleClick(e) {
+      if (userMenuRef.current && !userMenuRef.current.contains(e.target)) {
+        setShowUserMenu(false);
+      }
+    }
+    document.addEventListener('mousedown', handleClick);
+    return () => document.removeEventListener('mousedown', handleClick);
+  }, []);
 
-    useEffect(() => {
-        const handleScroll = () => {
-            const st = window.pageYOffset || document.documentElement.scrollTop;
-            if (st > lastScrollTop) {
-                setShowNavbar(false); // scrolling down
-            } else {
-                setShowNavbar(true); // scrolling up
-            }
-            setLastScrollTop(st <= 0 ? 0 : st);
+  return (
+    <header className={`w-full fixed top-0 left-0 z-50 transition-all duration-500 ease-in-out ${showNavbar ? 'translate-y-0' : '-translate-y-full'}`}>
+      <div className="w-full bg-gradient-to-r from-[#1E88E5] to-[#3949AB] shadow-sm">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <nav className="h-16 flex items-center justify-between">
+            <div className="flex items-center gap-4">
+              <img className='md:w-[80px] w-[60px]' src="https://i.ibb.co/YT4cqW4V/Whats-App-Image-2025-07-16-at-03-44-14-43bc9fb4-removebg-preview.png" alt="logo" />
+              <NavLink to={'/'} className="text-[22px] md:text-[28px] font-extrabold text-[#E53935]">Food<span className='text-white'>Bond</span></NavLink>
+            </div>
 
-            if (scrollTimeout) clearTimeout(scrollTimeout);
-            const timeout = setTimeout(() => {
-                setShowNavbar(true); // show again after pause
-            }, 1000); // 1 second delay
-            setScrollTimeout(timeout);
-        };
-
-        window.addEventListener("scroll", handleScroll);
-
-        return () => {
-            window.removeEventListener("scroll", handleScroll);
-            if (scrollTimeout) clearTimeout(scrollTimeout);
-        };
-    }, [lastScrollTop, scrollTimeout]);
-
-    return (
-        <div className={`navbar bg-gray-50 shadow-sm md:pl-6 md:pr-8 fixed top-0 left-0 right-0 z-50 transition-all duration-500 ease-in-out ${showNavbar ? 'translate-y-0' : '-translate-y-full'}`}>
-            <div className="navbar-start">
-                <div className="dropdown">
-                    <div tabIndex={0} role="button" className="btn btn-ghost bg-white text-black lg:hidden">
-                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" />
-                        </svg>
+            <div className="hidden md:flex gap-6">
+              <ul className="flex items-center gap-4">{linksPage}</ul>
+              {user ? (
+                <div className="relative" ref={userMenuRef}>
+                  <button onClick={() => setShowUserMenu(s => !s)} className="flex items-center gap-2">
+                    <div className="w-10 h-10 rounded-full overflow-hidden">
+                      <img src={user?.photoURL || "https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"} alt="user" />
                     </div>
-                    <ul tabIndex={0} className="menu menu-sm dropdown-content bg-white rounded-box z-1 mt-3 w-42 p-2 shadow">
-                        {linksPage}
-                    </ul>
-                </div>
-                <div className='flex h-[48px] items-center'>
-                    <img className='md:w-[80px] w-[60px] h-[60px] md:h-auto' src="https://i.ibb.co/YT4cqW4V/Whats-App-Image-2025-07-16-at-03-44-14-43bc9fb4-removebg-preview.png" alt="logo" />
-                    <NavLink to={'/'} className="md:text-[28px] text-[22px] font-extrabold text-[#E53935]">Food<span className='text-[#3949AB]'>Bond</span></NavLink>
-                </div>
-            </div>
-            <div className="navbar-center hidden md:flex">
-                <ul className="menu menu-horizontal md:space-x-2 px-1">
-                    {linksPage}
-                </ul>
-            </div>
-            <div className="navbar-end">
-                {user ? (
-                    <div className="dropdown dropdown-end">
-                        <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
-                            <div className="w-10 rounded-full">
-                                <img title={user?.displayName} alt="user" src={user?.photoURL || "https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"} />
-                            </div>
-                        </div>
-                        <ul tabIndex={0} className="menu dropdown-content bg-green-900 rounded-box font-bold text-white text-[18px]">
-                            <li><a onClick={handleLogOut}><IoIosLogOut size={20} />Logout</a></li>
-                        </ul>
+                  </button>
+                  {showUserMenu && (
+                    <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1">
+                      <button onClick={handleLogOut} className="flex items-center gap-2 px-4 py-2 text-sm hover:bg-gray-100 w-full text-left"><IoIosLogOut /> Logout</button>
                     </div>
-                ) : (
-                    <Link to={'/registration'} className="btn md:text-[16px] font-bold p-[20px] md:h-[40px] h-[40px] text-[22px] rounded-2xl bg-[#16a249] hover:bg-[#158f42] text-white">SignUp</Link>
-                )}
+                  )}
+                </div>
+              ) : (
+                <Link to={'/registration'} className="bg-[#16a249] hover:bg-[#158f42] text-white px-4 py-2 rounded-2xl font-bold">SignUp</Link>
+              )}
             </div>
+
+            <div className="md:hidden">
+              <button onClick={() => setMobileOpen(s => !s)} className="text-white">
+                {mobileOpen ? 'X' : '☰'}
+              </button>
+            </div>
+          </nav>
         </div>
-    );
+
+        {mobileOpen && (
+          <div className="md:hidden border-t border-white/20">
+            <ul className="flex flex-col p-4 gap-2">{linksPage}</ul>
+            {user ? (
+              <button onClick={handleLogOut} className="w-full text-left px-4 py-2 text-white hover:bg-white/20">Logout</button>
+            ) : (
+              <Link to={'/registration'} className="block bg-[#16a249] text-center py-2 rounded-2xl text-white font-bold mt-2">SignUp</Link>
+            )}
+          </div>
+        )}
+      </div>
+    </header>
+  );
 };
 
 export default Navbar;

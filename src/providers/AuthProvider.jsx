@@ -53,7 +53,7 @@ const AuthProvider = ({ children }) => {
       
       axios.get("http://localhost:5000", {
         headers: {
-          Authorization: `Bearer ${currentUser.accessToken}`
+          Authorization: `Bearer ${currentUser?.accessToken}`
         }
       })
 

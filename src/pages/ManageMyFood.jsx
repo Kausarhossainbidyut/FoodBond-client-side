@@ -14,20 +14,20 @@ const ManageFoods = () => {
         fetchFoods();
     }, [user]);
 
-   const fetchFoods = () => {
-  if (!user || !user.getIdToken) return;  // getIdToken আছে কি চেক
+    const fetchFoods = () => {
+        if (!user || !user.getIdToken) return;  // getIdToken আছে কি চেক
 
-  user.getIdToken().then(token => {
-    axios.get(`http://localhost:5000/manage-my-food`, {
-      headers: { Authorization: `Bearer ${token}` }
-    }).then(res => {
-      setFoods(res.data);
-    }).catch(err => {
-      console.error("Fetch error:", err);
-      Swal.fire('Error', 'Failed to fetch foods.', 'error');
-    });
-  });
-};
+        user.getIdToken().then(token => {
+            axios.get(`http://localhost:5000/manage-my-food`, {
+                headers: { Authorization: `Bearer ${token}` }
+            }).then(res => {
+                setFoods(res.data);
+            }).catch(err => {
+                console.error("Fetch error:", err);
+                Swal.fire('Error', 'Failed to fetch foods.', 'error');
+            });
+        });
+    };
 
 
     const handleDelete = async (id) => {
