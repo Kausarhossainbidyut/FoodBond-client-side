@@ -1,12 +1,38 @@
-# React + Vite
+# FoodBond - Connecting Food Lovers & Reducing Waste
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Description  
+FoodBond is a platform dedicated to connecting food lovers and promoting food sharing to reduce waste. Join the community to share, discover, and enjoy delicious food while contributing to a sustainable future.
 
-Currently, two official plugins are available:
+## Live Demo  
+[View Live Project](https://assignment-11-2a60f.web.app/)  <!-- এখানে প্রকৃত লাইভ লিংক বসাও -->
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Technologies Used  
+- React.js  
+- Tailwind CSS  
+- Node.js  
+- Express.js  
+- MongoDB  
+- Firebase Authentication  
 
-## Expanding the ESLint configuration
+## Screenshot  
+![FoodBond Screenshot](https://your-screenshot-link.com)  <!-- এখানে প্রকৃত স্ক্রিনশট লিংক বসাও -->
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Core Features  
+- User registration and login with Firebase Authentication  
+- Food sharing and donation system  
+- Search and filter food items by location and type  
+- Responsive and clean UI built with Tailwind CSS  
+- Real-time updates and notifications  
+
+## Dependencies  
+- react@17+  
+- tailwindcss@3+  
+- express@4+  
+- mongoose@6+  
+- firebase@9+
+
+## Installation and Running Locally
+
+1. Clone the repository  
+```bash
+git clone https://github.com/yourusername/foodbond.git
