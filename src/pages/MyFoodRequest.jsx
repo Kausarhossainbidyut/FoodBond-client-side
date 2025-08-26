@@ -3,6 +3,7 @@ import axios from "axios";
 import Card3 from "../ShareingPage/Card3";
 import { AuthContext } from "../providers/AuthProvider";
 import Swal from "sweetalert2";
+import { Link } from "react-router";
 
 const MyFoodRequest = () => {
   const [foods, setFoods] = useState([]);
@@ -53,7 +54,7 @@ const MyFoodRequest = () => {
         {foods.length === 0 ? (
           <div className="text-center text-gray-500 py-20">
             No food requests found. <br />
-            <span className="text-green-600 font-semibold">Make a request now!</span>
+            <Link to={"/available-food"} className="text-green-600 font-semibold">Make a request now!</Link >
           </div>
         ) : (
           <div>

@@ -11,6 +11,7 @@ import MyFoodRequest from "../pages/MyFoodRequest";
 import FoodDetails from "../ShareingPage/FoodDetails";
 import axios from "axios";
 import EditData from "../ShareingPage/EditData";
+import PrivateRoute from "./PrivateRoute";
 
 const mainRoutes = createBrowserRouter([
   {
@@ -28,19 +29,19 @@ const mainRoutes = createBrowserRouter([
       },
       {
         path: "/manage-my-food",
-        element: <ManageMyFood></ManageMyFood>,
+        element: <PrivateRoute><ManageMyFood></ManageMyFood></PrivateRoute>,
       },
       {
         path: "/my-food-request",
-        element: <MyFoodRequest></MyFoodRequest> ,
+        element: <PrivateRoute><MyFoodRequest></MyFoodRequest></PrivateRoute> ,
       },
       {
         path: "/add-food",
-        element: <AddFood></AddFood>,
+        element: <PrivateRoute><AddFood></AddFood></PrivateRoute>
       },
       {
         path: "/edit",
-        element: <EditData></EditData>,
+        element: <PrivateRoute><EditData></EditData></PrivateRoute>,
       },
       {
         path: "login",
@@ -52,7 +53,7 @@ const mainRoutes = createBrowserRouter([
       },
       {
         path: '/food-details/:foodId',
-        element: <FoodDetails></FoodDetails>,
+        element: <PrivateRoute><FoodDetails></FoodDetails></PrivateRoute>,
         loader: async({params})=>{
         const {data} = await axios.get(`https://mission-scic-assignment.vercel.app/
 food-details/${params.foodId}`)

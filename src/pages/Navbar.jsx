@@ -35,7 +35,7 @@ const Navbar = () => {
         {!user && (
             <>
                 <li className='text-[16px] text-[#1E88E5] font-medium hover:text-orange-500'>
-                    <NavLink className={({ isActive }) => isActive ? "text-green-600 underline" : ''} to={'/registration'}>Sign Up</NavLink>
+                    <NavLink className={({ isActive }) => isActive ? "text-green-600 underline" : ''} to={'/add-food'}>Add Food</NavLink>
                 </li>
             </>
         )}
