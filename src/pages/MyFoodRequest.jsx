@@ -54,7 +54,7 @@ const MyFoodRequest = () => {
         {foods.length === 0 ? (
           <div className="text-center text-gray-500 py-20">
             No food requests found. <br />
-            <Link to={"/available-food"} className="text-green-600 font-semibold">Make a request now!</Link >
+            <Link to={"/available-food"} className="text-green-600 underline hover:text-green-700">Make a request now!</Link >
           </div>
         ) : (
           <div>
