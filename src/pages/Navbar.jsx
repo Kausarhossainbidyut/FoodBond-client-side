@@ -3,7 +3,7 @@ import { IoIosLogOut } from "react-icons/io";
 import { Link, NavLink } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import { AuthContext } from '../providers/AuthProvider';
-
+import logoImage from '../../public/logo.png'
 const Navbar = () => {
     const { user, logOut } = useContext(AuthContext);
     const [showNavbar, setShowNavbar] = useState(true);
@@ -95,11 +95,12 @@ const Navbar = () => {
                             {linksPage}
                         </ul>
                     </div>
+
                     {/* Logo and Brand */}
                     <Link to="/" className="flex items-center space-x-2">
                         <img
                             className='md:w-[80px] w-[60px] h-[60px] md:h-auto'
-                            src="https://i.ibb.co/YT4cqW4V/Whats-App-Image-2025-07-16-at-03-44-14-43bc9fb4-removebg-preview.png"
+                            src={logoImage}
                             alt="logo"
                         />
                         <span className="md:text-2xl text-xl font-extrabold text-[#E53935]">
