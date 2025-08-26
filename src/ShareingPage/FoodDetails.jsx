@@ -25,7 +25,7 @@ const FoodDetails = () => {
   const handleRequest = () => {
     axios
       .patch(
-        `http://localhost:5000/
+        `https://mission-scic-assignment.vercel.app/
 request/${_id}`,
         { userNotes: userNote }, 
         {

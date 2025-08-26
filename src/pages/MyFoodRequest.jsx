@@ -12,7 +12,7 @@ const MyFoodRequest = () => {
     if (!user?.accessToken) return;
 
     axios
-      .get("http://localhost:5000/my-food-request", {
+      .get("https://mission-scic-assignment.vercel.app/my-food-request", {
         headers: { Authorization: `Bearer ${user.accessToken}` },
       })
       .then((res) => setFoods(res.data))
@@ -22,7 +22,7 @@ const MyFoodRequest = () => {
   const handleCancelRequest = (id) => {
     axios
       .patch(
-        `http://localhost:5000/cancel-request/${id}`,
+        `https://mission-scic-assignment.vercel.app/cancel-request/${id}`,
         { userNotes: "" },
         {
           headers: { Authorization: `Bearer ${user.accessToken}` },

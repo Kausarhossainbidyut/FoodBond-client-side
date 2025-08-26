@@ -51,7 +51,7 @@ const AuthProvider = ({ children }) => {
       console.log("🚀 ~ unsubscribe ~ currentUser:", currentUser)
       setUser(currentUser);
       
-      axios.get("http://localhost:5000", {
+      axios.get("https://mission-scic-assignment.vercel.app", {
         headers: {
           Authorization: `Bearer ${currentUser?.accessToken}`
         }

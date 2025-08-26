@@ -10,7 +10,7 @@ const AvailableFood = () => {
 
   useEffect(() => {
     setLoading(true);
-    axios.get("http://localhost:5000/available-food")
+    axios.get("https://mission-scic-assignment.vercel.app/available-food")
       .then(res => {
         setFoods(res.data);
         setLoading(false);
@@ -23,7 +23,7 @@ const AvailableFood = () => {
 
   const handleSearch = () => {
     setLoading(true);
-    axios.get('http://localhost:5000/available-food', {
+    axios.get('https://mission-scic-assignment.vercel.app/available-food', {
       params: { foodName: searchTerm }
     })
     .then(res => {

@@ -15,7 +15,7 @@ const Home = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    axios.get("http://localhost:5000/featured-foods")
+    axios.get("https://mission-scic-assignment.vercel.app/featured-foods")
       .then(res => {
         setFoods(res.data);
         setLoading(false);

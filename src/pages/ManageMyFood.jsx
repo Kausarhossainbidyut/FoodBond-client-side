@@ -18,7 +18,7 @@ const ManageFoods = () => {
     if (!user || !user.getIdToken) return;
 
     user.getIdToken().then(token => {
-      axios.get(`http://localhost:5000/manage-my-food`, {
+      axios.get(`https://mission-scic-assignment.vercel.app/manage-my-food`, {
         headers: { Authorization: `Bearer ${token}` }
       }).then(res => {
         setFoods(res.data);
@@ -44,7 +44,7 @@ const ManageFoods = () => {
       try {
         const token = await user.getIdToken();
 
-        const res = await axios.delete(`http://localhost:5000/manage-my-food/${id}`, {
+        const res = await axios.delete(`https://mission-scic-assignment.vercel.app/manage-my-food/${id}`, {
           headers: {
             Authorization: `Bearer ${token}`
           }

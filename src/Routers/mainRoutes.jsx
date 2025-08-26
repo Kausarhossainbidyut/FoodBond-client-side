@@ -54,7 +54,7 @@ const mainRoutes = createBrowserRouter([
         path: '/food-details/:foodId',
         element: <FoodDetails></FoodDetails>,
         loader: async({params})=>{
-        const {data} = await axios.get(`http://localhost:5000/
+        const {data} = await axios.get(`https://mission-scic-assignment.vercel.app/
 food-details/${params.foodId}`)
         return data;
         }
