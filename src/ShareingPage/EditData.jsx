@@ -3,6 +3,7 @@ import React from 'react';
 import { useContext } from 'react';
 import { AuthContext } from '../providers/AuthProvider';
 import Swal from 'sweetalert2';
+import { FaUtensils } from 'react-icons/fa';
 
 const EditData = () => {
 
@@ -20,7 +21,7 @@ const EditData = () => {
     data.status = "available";
     console.log(data);
 
-    axios.post("mission-scic-assignment.vercel.app/add-food", data)
+    axios.post("https://mission-scic-assignment.vercel.app/add-food", data)
       .then(res => {
         console.log("axios res:", res);
         if (res.data.insertedId) {
@@ -39,13 +40,14 @@ const EditData = () => {
   };
 
   return (
-    <div className="flex items-center justify-center bg-gradient-to-br from-green-50 to-white px-4 py-8">
+    <div className="flex items-center justify-center bg-gray-50 px-4 py-8">
       <form
         onSubmit={handleSubmit}
         className="bg-white p-6 rounded-xl shadow-lg w-full max-w-xl space-y-4"
       >
-        <h2 className="text-xl font-semibold text-gray-800 text-center">
-          🍽️ Share Surplus Food
+        <h2 className="text-xl font-semibold text-gray-800 text-center flex items-center justify-center gap-2">
+          <FaUtensils className="text-green-600" />
+          Share Surplus Food
         </h2>
 
         <div>

@@ -17,72 +17,85 @@ const Card1 = ({ food = {} }) => {
     status,
   } = food;
 
-  const fallbackFoodImage = "/images/fallback-food.jpg"; // public/images এ fallback রাখুন
-  const fallbackDonorImage = "/images/fallback-donor.jpg";
+  const fallbackFoodImage = "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=500"; 
+  const fallbackDonorImage = "https://ui-avatars.com/api/?name=User&background=random";
 
-  const [loaded, setLoaded] = useState(false); // image লোড স্টেট
+  const [loaded, setLoaded] = useState(false);
 
   return (
-    <div>
-      <div className="bg-white rounded-xl shadow-md relative p-4 transform transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
-        {/* Quantity */}
-        <span className="absolute top-2 right-2 bg-green-300 text-green-700 text-sm px-2 py-1 rounded-full">
-          Qty: {quantity || 0}
-        </span>
+    <div className="bg-white border border-gray-300 rounded overflow-hidden">
+      {/* Food Image */}
+      <div className="h-40 bg-gray-100 overflow-hidden">
+        <img
+          src={foodImage || fallbackFoodImage}
+          alt={foodName || "Food"}
+          onLoad={() => setLoaded(true)}
+          onError={(e) => (e.target.src = fallbackFoodImage)}
+          className={`w-full h-full object-cover ${loaded ? "opacity-100" : "opacity-0"}`}
+        />
+      </div>
 
-        {/* Status */}
-        <span className="absolute top-1 left-1 bg-orange-800 text-white text-sm px-2 py-1 rounded-[15px]">
-          {status || "Pending"}
-        </span>
-
-        {/* Food Image with Blur */}
-        <div className="w-full h-[200px] mb-4 overflow-hidden rounded-lg">
-          <img
-            src={foodImage || fallbackFoodImage}
-            alt={foodName || "Food"}
-            onLoad={() => setLoaded(true)}
-            onError={(e) => (e.target.src = fallbackFoodImage)}
-            className={`w-full h-full object-cover transition-all duration-500 ${
-              loaded ? "blur-0" : "blur-xl"
-            }`}
-          />
+      {/* Card Content */}
+      <div className="p-3">
+        {/* Badges */}
+        <div className="flex justify-between items-start mb-2">
+          <span className={`text-white text-xs font-medium px-2 py-1 rounded ${
+            parseInt(quantity) === 0 ? 'bg-gray-500' :
+            status === 'available' ? 'bg-gray-700' : 'bg-gray-600'
+          }`}>
+            {parseInt(quantity) === 0 ? 'Unavailable' : 'Available'}
+          </span>
+          
+          <span className={`text-white text-xs font-medium px-2 py-1 rounded ${
+            parseInt(quantity) === 0 ? 'bg-gray-500' : 
+            parseInt(quantity) <= 3 ? 'bg-gray-600' : 
+            'bg-gray-700'
+          }`}>
+            {quantity || 0} left
+          </span>
         </div>
 
         {/* Food Name */}
-        <h2 className="text-lg font-semibold mb-1">{foodName || "Unknown Food"}</h2>
+        <h3 className="text-base font-medium text-gray-800 mb-2 line-clamp-1">
+          {foodName || "Unknown Food"}
+        </h3>
 
         {/* Donor Info */}
-        <div className="flex items-center mb-2">
+        <div className="flex items-center gap-2 mb-2 pb-2 border-b border-gray-200">
           <img
             src={donorImage || fallbackDonorImage}
             alt={donorName || "Donor"}
             onError={(e) => (e.target.src = fallbackDonorImage)}
-            className="w-10 h-10 rounded-full mr-3 object-cover"
+            className="w-7 h-7 rounded-full object-cover border border-gray-300"
           />
-          <div>
-            <div className="text-[16px] font-bold text-gray-700 mb-1">
+          <div className="flex-1 min-w-0">
+            <p className="text-sm text-gray-800 truncate">
               {donorName || "Anonymous"}
-            </div>
-            <div className="text-sm text-gray-700 flex items-center">
-              <IoLocationOutline size={15} />
-              <span className="pl-1">{location || "Unknown Location"}</span>
+            </p>
+            <div className="flex items-center text-xs text-gray-500">
+              <IoLocationOutline size={12} className="mr-1" />
+              <span className="truncate">{location || "Unknown"}</span>
             </div>
           </div>
         </div>
 
         {/* Expiration Date */}
-        <div className="text-sm flex items-center text-gray-700 mb-2">
-          <CiClock1 size={19} />
-          <span className="pl-1">Expires: {expirationDate || "N/A"}</span>
+        <div className="flex items-center text-sm text-gray-600 mb-3">
+          <CiClock1 size={14} className="mr-1" />
+          <span>Expires: {expirationDate || "N/A"}</span>
         </div>
-
-        {/* Notes */}
-        <p className="text-sm text-gray-600 mb-4">{notes || "No additional notes."}</p>
 
         {/* View Details Button */}
         <Link to={`/food-details/${_id}`}>
-          <button className="bg-green-600 cursor-pointer text-white w-full py-2 rounded-lg hover:bg-green-700 transition">
-            View Details
+          <button 
+            disabled={parseInt(quantity) === 0}
+            className={`w-full py-1.5 rounded text-sm ${
+              parseInt(quantity) === 0
+                ? 'bg-gray-200 text-gray-500 cursor-not-allowed'
+                : 'bg-gray-800 hover:bg-gray-900 text-white'
+            }`}
+          >
+            {parseInt(quantity) === 0 ? 'Out of Stock' : 'View Details'}
           </button>
         </Link>
       </div>

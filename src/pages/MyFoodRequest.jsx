@@ -1,63 +1,79 @@
-import React, { useState, useEffect, useContext } from "react";
-import axios from "axios";
+import React, { useContext } from "react";
 import Card3 from "../ShareingPage/Card3";
 import { AuthContext } from "../providers/AuthProvider";
 import Swal from "sweetalert2";
 import { Link } from "react-router";
+import { useMyFoodRequests, useCancelRequest } from '../hooks/useFoods';
+import LoadingSpinner from '../components/LoadingSpinner';
+import { FaShoppingCart } from 'react-icons/fa';
 
 const MyFoodRequest = () => {
-  const [foods, setFoods] = useState([]);
   const { user } = useContext(AuthContext);
-
-  useEffect(() => {
-    if (!user?.accessToken) return;
-
-    axios
-      .get("https://mission-scic-assignment.vercel.app/my-food-request", {
-        headers: { Authorization: `Bearer ${user.accessToken}` },
-      })
-      .then((res) => setFoods(res.data))
-      .catch((err) => console.error(err));
-  }, [user]);
+  const { data: foods = [], isLoading } = useMyFoodRequests(user?.accessToken);
+  const cancelRequest = useCancelRequest();
 
   const handleCancelRequest = (id) => {
-    axios
-      .patch(
-        `https://mission-scic-assignment.vercel.app/cancel-request/${id}`,
-        { userNotes: "" },
-        {
-          headers: { Authorization: `Bearer ${user.accessToken}` },
-        }
-      )
-      .then((res) => {
-        if (res.data.modifiedCount > 0) {
-          Swal.fire("Cancelled!", "Your request has been cancelled.", "success");
-          setFoods((prevFoods) => prevFoods.filter((food) => food._id !== id));
-        }
-      })
-      .catch((err) => {
-        console.error(err);
-        Swal.fire("Error!", "Could not cancel your request.", "error");
-      });
+    Swal.fire({
+      title: 'Cancel Request?',
+      text: "This will make the food available again.",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, cancel it!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        cancelRequest.mutate(
+          { id, userNotes: "", token: user.accessToken },
+          {
+            onSuccess: () => {
+              Swal.fire("Cancelled!", "Your request has been cancelled.", "success");
+            },
+            onError: (err) => {
+              console.error(err);
+              Swal.fire("Error!", "Could not cancel your request.", "error");
+            }
+          }
+        );
+      }
+    });
   };
 
+  if (isLoading) {
+    return <LoadingSpinner size="large" message="Loading your requests..." />;
+  }
+
   return (
-    <div className="min-h-screen bg-gray-50 p-4 sm:p-6">
-      <div className="max-w-4xl mx-auto">
-        <h1 className="text-2xl sm:text-3xl font-bold text-gray-800 mb-2">
-          My Food Requests
-        </h1>
-        <p className="text-gray-600 mb-6">
-          Track the status of food you've requested from the community.
-        </p>
+    <div className="min-h-screen bg-gradient-to-br from-purple-50 via-pink-50 to-orange-50 px-4 py-8">
+      <div className="max-w-5xl mx-auto">
+        <div className="mb-8">
+          <h1 className="text-3xl sm:text-4xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent mb-3">
+            🛍️ My Food Requests
+          </h1>
+          <p className="text-gray-600 text-lg">
+            Track the status of food you've requested from the community
+          </p>
+        </div>
         
         {foods.length === 0 ? (
-          <div className="text-center text-gray-500 py-20">
-            No food requests found. <br />
-            <Link to={"/available-food"} className="text-green-600 underline hover:text-green-700">Make a request now!</Link >
+          <div className="bg-white rounded-2xl shadow-xl p-16 text-center">
+            <div className="mb-6">
+              <div className="inline-block p-6 bg-gradient-to-br from-purple-100 to-pink-100 rounded-full">
+                <FaShoppingCart className="text-purple-600 text-6xl" />
+              </div>
+            </div>
+            <h2 className="text-2xl font-bold text-gray-800 mb-3">No requests yet</h2>
+            <p className="text-gray-600 text-lg mb-6">
+              Start browsing available food items to make your first request!
+            </p>
+            <Link to="/available-food">
+              <button className="bg-gradient-to-r from-purple-600 to-pink-600 text-white font-semibold py-3 px-8 rounded-lg hover:from-purple-700 hover:to-pink-700 transition transform hover:scale-105 shadow-lg">
+                🔍 Browse Available Food
+              </button>
+            </Link>
           </div>
         ) : (
-          <div>
+          <div className="space-y-4">
             {foods.map((food) => (
               <Card3 key={food._id} food={food} handleRequest={handleCancelRequest} />
             ))}

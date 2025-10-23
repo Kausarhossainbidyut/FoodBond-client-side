@@ -1,67 +1,53 @@
 import { Link } from "react-router";
 import Banner from "../components/Banner";
 import Card1 from "../ShareingPage/Card1";
-import CommunityVoices from "../ShareingPage/CommunityVoices";
 import HowItWorks from "../ShareingPage/HowWorkCard";
-import JoinMission from "../ShareingPage/JoinMission";
 import Footer from "./Footer";
 import Product from "./Product";
-import { useState, useEffect } from "react";
-import axios from "axios";
-import SalesPromotion from "../ShareingPage/SalesPromotion";
+import { useFeaturedFoods } from '../hooks/useFoods';
+import LoadingSpinner from '../components/LoadingSpinner';
+import Statistics from '../components/Statistics';
+import WhyChooseUs from '../components/WhyChooseUs';
+import LiveStats from '../components/LiveStats';
 
 const Home = () => {
-  const [foods, setFoods] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const { data: foods = [], isLoading } = useFeaturedFoods();
 
-  useEffect(() => {
-    axios.get("https://mission-scic-assignment.vercel.app/featured-foods")
-      .then(res => {
-        setFoods(res.data);
-        setLoading(false);
-      })
-      .catch(err => {
-        console.error(err);
-        setLoading(false);
-      });
-  }, []);
-
-  if (loading) {
-    return (
-      <div className="flex justify-center items-center min-h-screen">
-        <button className="btn btn-square loading"></button>
-      </div>
-    );
+  if (isLoading) {
+    return <LoadingSpinner size="large" message="Loading featured foods..." />;
   }
 
   return (
     <>
       <Product />
-      {/* <Banner /> */}
-      <div className="bg-[#ecd5d580] py-[40px] px-4">
-        <div className="mx-auto">
-          <h1 className="text-3xl font-bold text-center mb-2">Featured Foods</h1>
-          <p className="text-center text-gray-600 mb-10">
-            Freshly added and abundant meals waiting for you.
+      {/* Featured Foods Section */}
+      <div className="bg-gray-50 py-16 px-4">
+        <div className="max-w-7xl mx-auto">
+          <h1 className="text-4xl md:text-5xl font-bold text-center mb-3 text-green-600">
+            Available Food Near You
+          </h1>
+          <p className="text-center text-gray-600 text-lg mb-12">
+            Fresh meals shared by your neighbors
           </p>
           <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-6">
             {foods.map(food => <Card1 food={food} key={food._id} />)}
           </div>
-          <div className="mt-10 text-center">
+          <div className="mt-12 text-center">
             <Link
               to={'/available-food'}
-              className="cursor-pointer text-white px-6 py-3 rounded-lg bg-[#ad2d2b] hover:bg-[#D32F2F] transition"
+              className="inline-block text-white px-8 py-3 rounded-lg bg-green-600 hover:bg-green-700 transition-colors font-semibold shadow-md hover:shadow-lg"
             >
-              Show All Foods
+              Browse All Food
             </Link>
           </div>
         </div>
       </div>
 
+      {/* Essential Food Sharing Sections */}
+      <LiveStats />
       <HowItWorks />
-      <SalesPromotion />
-      <CommunityVoices />
-      <JoinMission />
+      <Statistics />
+      <WhyChooseUs />
     </>
   );
 };

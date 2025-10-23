@@ -12,6 +12,7 @@ import {
 } from "firebase/auth";
 import { createContext, useEffect, useState } from "react";
 import app from "../firebase/firebase.config";
+import { API_URL } from "../config/api";
 
 export const AuthContext = createContext();
 
@@ -51,7 +52,7 @@ const AuthProvider = ({ children }) => {
       console.log("🚀 ~ unsubscribe ~ currentUser:", currentUser)
       setUser(currentUser);
       
-      axios.get("https://mission-scic-assignment.vercel.app", {
+      axios.get(API_URL, {
         headers: {
           Authorization: `Bearer ${currentUser?.accessToken}`
         }

@@ -3,7 +3,8 @@ import { IoIosLogOut } from "react-icons/io";
 import { Link, NavLink } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import { AuthContext } from '../providers/AuthProvider';
-import logoImage from '../../public/logo.png'
+import logoImage from '../../public/logo.png';
+import NotificationBell from '../components/NotificationBell';
 const Navbar = () => {
     const { user, logOut } = useContext(AuthContext);
     const [showNavbar, setShowNavbar] = useState(true);
@@ -26,29 +27,28 @@ const Navbar = () => {
     };
 
     const linksPage = <>
-        <li className='text-[16px] text-[#1E88E5] font-medium hover:text-orange-500'>
-            <NavLink className={({ isActive }) => isActive ? "text-green-600 underline" : ''} to={"/"}>Home</NavLink>
+        <li className='text-base font-semibold'>
+            <NavLink className={({ isActive }) => isActive ? "text-green-600 font-bold" : 'text-gray-700 hover:text-green-600 transition-colors'} to={"/"}>Home</NavLink>
         </li>
-        <li className='text-[16px] text-[#1E88E5] font-medium hover:text-orange-500'>
-            <NavLink className={({ isActive }) => isActive ? "text-green-600 underline" : ''} to={'/available-food'}>Available Food</NavLink>
+        <li className='text-base font-semibold'>
+            <NavLink className={({ isActive }) => isActive ? "text-green-600 font-bold" : 'text-gray-700 hover:text-green-600 transition-colors'} to={'/available-food'}>Available Food</NavLink>
         </li>
+        {user && (
+            <li className='text-base font-semibold'>
+                <NavLink className={({ isActive }) => isActive ? "text-green-600 font-bold" : 'text-gray-700 hover:text-green-600 transition-colors'} to={'/dashboard'}>Dashboard</NavLink>
+            </li>
+        )}
         {!user && (
             <>
-                <li className='text-[16px] text-[#1E88E5] font-medium hover:text-orange-500'>
-                    <NavLink className={({ isActive }) => isActive ? "text-green-600 underline" : ''} to={'/add-food'}>Add Food</NavLink>
+                <li className='text-base font-semibold'>
+                    <NavLink className={({ isActive }) => isActive ? "text-green-600 font-bold" : 'text-gray-700 hover:text-green-600 transition-colors'} to={'/add-food'}>Add Food</NavLink>
                 </li>
             </>
         )}
         {user &&
             <>
-                <li className='text-[16px] text-[#1E88E5] font-medium hover:text-orange-500'>
-                    <NavLink className={({ isActive }) => isActive ? "text-green-600 underline" : ''} to={'/add-food'}>Add Food</NavLink>
-                </li>
-                <li className='text-[16px] text-[#1E88E5] font-medium hover:text-orange-500'>
-                    <NavLink className={({ isActive }) => isActive ? "text-green-600 underline" : ''} to={'/manage-my-food'}>Manage My Food</NavLink>
-                </li>
-                <li className='text-[16px] text-[#1E88E5] font-medium hover:text-orange-500'>
-                    <NavLink className={({ isActive }) => isActive ? "text-green-600 underline" : ''} to={'/my-food-request'}>My Food Request</NavLink>
+                <li className='text-base font-semibold'>
+                    <NavLink className={({ isActive }) => isActive ? "text-green-600 font-bold" : 'text-gray-700 hover:text-green-600 transition-colors'} to={'/analytics'}>Analytics</NavLink>
                 </li>
             </>
         }
@@ -80,7 +80,9 @@ const Navbar = () => {
     }, [lastScrollTop, scrollTimeout]);
 
     return (
-        <div className={`fixed py-[3px] top-0 left-0 right-0 z-50 bg-gray-50 shadow-sm transition-all duration-500 ease-in-out ${showNavbar ? 'translate-y-0' : '-translate-y-full'}`}>
+        <div className={`fixed py-1 top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-md shadow-lg border-b border-gray-200 transition-all duration-500 ease-in-out ${
+            showNavbar ? 'translate-y-0' : '-translate-y-full'
+        }`}>
             {/* content container with horizontal padding, max width for consistent layout */}
             <div className="max-w-7xl mx-auto px-4 md:px-6 flex items-center justify-between h-16">
                 <div className="flex items-center space-x-4">
@@ -97,14 +99,17 @@ const Navbar = () => {
                     </div>
 
                     {/* Logo and Brand */}
-                    <Link to="/" className="flex items-center space-x-2">
-                        <img
-                            className='md:w-[80px] w-[60px] h-[60px] md:h-auto'
-                            src={logoImage}
-                            alt="logo"
-                        />
-                        <span className="md:text-2xl text-xl font-extrabold text-[#E53935]">
-                            Food<span className='text-[#3949AB]'>Bond</span>
+                    <Link to="/" className="flex items-center space-x-3 group">
+                        <div className="relative">
+                            <img
+                                className='md:w-[70px] w-[55px] h-[55px] md:h-[70px] transform group-hover:scale-110 transition-transform duration-300'
+                                src={logoImage}
+                                alt="logo"
+                            />
+                        </div>
+                        <span className="md:text-2xl text-xl font-extrabold">
+                            <span className="text-green-600">Food</span>
+                            <span className="text-orange-600">Bond</span>
                         </span>
                     </Link>
                 </div>
@@ -115,11 +120,14 @@ const Navbar = () => {
                 </ul>
 
                 {/* right side user info or signup */}
-                <div>
+                <div className="flex items-center gap-4">
+                    {/* Notification Bell */}
+                    <NotificationBell />
+                    
                     {user ? (
                         <div className="dropdown dropdown-end">
-                            <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
-                                <div className="w-10 rounded-full">
+                            <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar hover:scale-110 transition-transform">
+                                <div className="w-11 rounded-full ring-2 ring-green-200 hover:ring-green-400 transition-all">
                                     <img
                                         title={user?.displayName}
                                         alt="user"
@@ -127,9 +135,9 @@ const Navbar = () => {
                                     />
                                 </div>
                             </div>
-                            <ul tabIndex={0} className="menu dropdown-content bg-green-900 rounded-box font-bold text-white text-[18px]">
+                            <ul tabIndex={0} className="menu dropdown-content bg-green-600 rounded-lg font-bold text-white shadow-lg mt-3">
                                 <li>
-                                    <a onClick={handleLogOut} className="flex items-center gap-2 cursor-pointer">
+                                    <a onClick={handleLogOut} className="flex items-center gap-2 cursor-pointer hover:bg-green-700 rounded-lg transition-colors">
                                         <IoIosLogOut size={20} /> Logout
                                     </a>
                                 </li>
@@ -138,9 +146,9 @@ const Navbar = () => {
                     ) : (
                         <Link
                             to={'/registration'}
-                            className="btn md:text-[16px] font-bold px-6 h-10 text-[22px] rounded-2xl bg-[#16a249] hover:bg-[#158f42] text-white"
+                            className="btn md:text-base font-bold px-6 h-11 rounded-lg bg-green-600 hover:bg-green-700 text-white border-none shadow-md transition-colors"
                         >
-                            SignUp
+                            Sign Up
                         </Link>
                     )}
                 </div>

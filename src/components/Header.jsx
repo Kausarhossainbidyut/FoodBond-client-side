@@ -3,6 +3,8 @@ import { CgMenuMotion } from "react-icons/cg";
 import { RiMenuAddLine } from "react-icons/ri";
 import { Link, NavLink } from "react-router";
 import { AuthContext } from "../providers/AuthProvider";
+import { FaUtensils } from "react-icons/fa";
+import NotificationBell from "./NotificationBell";
 
 const Header = () => {
   const { user, logOut } = useContext(AuthContext);
@@ -23,15 +25,15 @@ const Header = () => {
     <nav className="overflow-x-clip">
       {user && (
         <p className="text-center text-white bg-black py-2 bg-opacity-90">
-          Welcome Mr. {user?.displayName} ❤️‍🔥❤️‍🔥. Now You Can Watch All the
-          Recipies🍉🍉
+          Welcome Mr. {user?.displayName}. Now You Can Watch All the Recipes
         </p>
       )}
       <div className="text-center bg-slate-400"></div>
       <div className="w-11/12 mx-auto py-5 flex justify-between items-center relative">
         <Link to="/" className="logo">
-          <span className="text-xl font-bold text-stone-700">
-            Auth 🍳 Template
+          <span className="text-xl font-bold text-stone-700 flex items-center gap-2">
+            <FaUtensils className="text-green-600" />
+            Food Sharing
           </span>
         </Link>
 
@@ -44,6 +46,7 @@ const Header = () => {
           ))}
           {user && user?.email ? (
             <>
+              <NotificationBell />
               <button className="cursor-pointer" onClick={logOut}>
                 Logout
               </button>
@@ -84,8 +87,7 @@ const Header = () => {
             >
               {menu.map((item) => (
                 <NavLink
-                  className="border-b-2 hover:border-orange-500 transition duration-200
-                   "
+                  className="border-b-2 hover:border-orange-500 transition duration-200"
                   key={item.path}
                   to={item.path}
                 >
