@@ -9,6 +9,8 @@ import LoadingSpinner from '../components/LoadingSpinner';
 import Statistics from '../components/Statistics';
 import WhyChooseUs from '../components/WhyChooseUs';
 import LiveStats from '../components/LiveStats';
+import ImpactMap from '../components/ImpactMap';
+import CommunityEngagement from '../components/CommunityEngagement';
 
 const Home = () => {
   const { data: foods = [], isLoading } = useFeaturedFoods();
@@ -46,6 +48,8 @@ const Home = () => {
       {/* Essential Food Sharing Sections */}
       <LiveStats />
       <HowItWorks />
+      <ImpactMap />
+      <CommunityEngagement />
       <Statistics />
       <WhyChooseUs />
     </>

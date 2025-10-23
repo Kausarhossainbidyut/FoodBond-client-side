@@ -30,10 +30,10 @@ const SuccessStories = () => {
   ];
 
   return (
-    <section className="py-20 bg-gradient-to-br from-purple-50 via-pink-50 to-orange-50">
+    <section className="py-20 bg-gradient-to-br from-green-50 via-green-100 to-green-50">
       <div className="max-w-7xl mx-auto px-4">
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent mb-4">
+          <h2 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-green-600 to-green-700 bg-clip-text text-transparent mb-4">
             Stories That Inspire Us
           </h2>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto">
@@ -45,11 +45,11 @@ const SuccessStories = () => {
           {stories.map((story, index) => (
             <div
               key={index}
-              className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 relative"
+              className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 relative border border-gray-100"
             >
               {/* Quote Icon */}
               <div className="absolute top-6 right-6">
-                <FaQuoteLeft className="text-4xl text-purple-200" />
+                <FaQuoteLeft className="text-4xl text-green-200" />
               </div>
 
               {/* Profile */}
@@ -57,7 +57,7 @@ const SuccessStories = () => {
                 <img
                   src={story.image}
                   alt={story.name}
-                  className="w-16 h-16 rounded-full object-cover border-4 border-purple-100"
+                  className="w-16 h-16 rounded-full object-cover border-4 border-green-100 transition-transform duration-300 hover:scale-110"
                 />
                 <div>
                   <h3 className="font-bold text-lg text-gray-800">{story.name}</h3>
@@ -83,12 +83,12 @@ const SuccessStories = () => {
 
         {/* Call to Action */}
         <div className="mt-16 text-center">
-          <div className="bg-gradient-to-r from-purple-600 to-pink-600 rounded-2xl p-8 md:p-12 text-white shadow-xl">
+          <div className="bg-gradient-to-r from-green-600 to-green-700 rounded-2xl p-8 md:p-12 text-white shadow-xl transition-all duration-300 hover:shadow-2xl">
             <h3 className="text-3xl font-bold mb-4">Your Story Could Be Next!</h3>
-            <p className="text-xl text-purple-100 mb-6 max-w-2xl mx-auto">
+            <p className="text-xl text-green-100 mb-6 max-w-2xl mx-auto">
               Join thousands of people who are already making a positive impact in their communities
             </p>
-            <button className="bg-white text-purple-600 font-bold px-8 py-4 rounded-lg hover:bg-purple-50 transition transform hover:scale-105 shadow-lg">
+            <button className="bg-white text-green-600 font-bold px-8 py-4 rounded-lg hover:bg-green-50 transition-all duration-300 transform hover:-translate-y-1 shadow-lg hover:shadow-xl">
               Start Your Journey Today
             </button>
           </div>

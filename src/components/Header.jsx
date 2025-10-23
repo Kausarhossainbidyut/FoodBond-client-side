@@ -24,14 +24,14 @@ const Header = () => {
   return (
     <nav className="overflow-x-clip">
       {user && (
-        <p className="text-center text-white bg-black py-2 bg-opacity-90">
+        <p className="text-center text-white bg-green-600 py-2 bg-opacity-90">
           Welcome Mr. {user?.displayName}. Now You Can Watch All the Recipes
         </p>
       )}
       <div className="text-center bg-slate-400"></div>
       <div className="w-11/12 mx-auto py-5 flex justify-between items-center relative">
         <Link to="/" className="logo">
-          <span className="text-xl font-bold text-stone-700 flex items-center gap-2">
+          <span className="text-xl font-bold text-stone-700 flex items-center gap-2 transition-colors duration-300 hover:text-green-600">
             <FaUtensils className="text-green-600" />
             Food Sharing
           </span>
@@ -40,21 +40,21 @@ const Header = () => {
         {/* menu-lg start */}
         <ul className="hidden lg:flex items-center gap-5 ">
           {menu.map((item) => (
-            <NavLink key={item.path} to={item.path}>
+            <NavLink key={item.path} to={item.path} className="hover:text-green-600 transition-colors duration-300">
               {item.name}
             </NavLink>
           ))}
           {user && user?.email ? (
             <>
               <NotificationBell />
-              <button className="cursor-pointer" onClick={logOut}>
+              <button className="cursor-pointer hover:text-green-600 transition-colors duration-300" onClick={logOut}>
                 Logout
               </button>
             </>
           ) : (
             <>
-              <NavLink to="/login">Login</NavLink>
-              <NavLink to="/registration">Register</NavLink>
+              <NavLink to="/login" className="hover:text-green-600 transition-colors duration-300">Login</NavLink>
+              <NavLink to="/registration" className="hover:text-green-600 transition-colors duration-300">Register</NavLink>
             </>
           )}
         </ul>
@@ -66,12 +66,12 @@ const Header = () => {
                 setIsMenuOpen(true);
                 setisPageLoad(true);
               }}
-              className="text-2xl cursor-pointer"
+              className="text-2xl cursor-pointer text-green-600"
             ></RiMenuAddLine>
           ) : (
             <CgMenuMotion
               onClick={() => setIsMenuOpen(false)}
-              className="text-2xl cursor-pointer"
+              className="text-2xl cursor-pointer text-green-600"
             ></CgMenuMotion>
           )}
 
@@ -87,7 +87,7 @@ const Header = () => {
             >
               {menu.map((item) => (
                 <NavLink
-                  className="border-b-2 hover:border-orange-500 transition duration-200"
+                  className="border-b-2 hover:border-green-500 transition duration-200"
                   key={item.path}
                   to={item.path}
                 >
@@ -96,14 +96,14 @@ const Header = () => {
               ))}
               {user && user?.email ? (
                 <>
-                  <button className="cursor-pointer" onClick={logOut}>
+                  <button className="cursor-pointer hover:text-green-600 transition-colors duration-300" onClick={logOut}>
                     Logout
                   </button>
                 </>
               ) : (
                 <>
-                  <NavLink to="/login">Login</NavLink>
-                  <NavLink to="/registration">Register</NavLink>
+                  <NavLink to="/login" className="hover:text-green-600 transition-colors duration-300">Login</NavLink>
+                  <NavLink to="/registration" className="hover:text-green-600 transition-colors duration-300">Register</NavLink>
                 </>
               )}
             </ul>

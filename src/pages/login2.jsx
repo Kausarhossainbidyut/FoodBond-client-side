@@ -22,19 +22,44 @@ const Login = () => {
 
     signIn(email, pass)
       .then((res) => {
-        Swal.fire("Success!", "Login successful", "success");
+        Swal.fire({
+          title: "Success!",
+          text: "Login successful",
+          icon: "success",
+          confirmButtonColor: "#16a34a",
+        });
         navigate(location.state?.from?.pathname || "/");
       })
       .catch((err) => {
         console.log(err.code); // Debugging এর জন্য error.code দেখো
         if (err.code === "auth/user-not-found") {
-          Swal.fire("User Not Found", "This email is not registered. Please go for Register.", "error");
+          Swal.fire({
+            title: "User Not Found",
+            text: "This email is not registered. Please go for Register.",
+            icon: "error",
+            confirmButtonColor: "#dc2626",
+          });
         } else if (err.code === "auth/wrong-password") {
-          Swal.fire("Login Failed", "Email or password is incorrect", "error");
+          Swal.fire({
+            title: "Login Failed",
+            text: "Email or password is incorrect",
+            icon: "error",
+            confirmButtonColor: "#dc2626",
+          });
         } else if (err.code === "auth/invalid-credential") {
-          Swal.fire("Login Failed", "Invalid login credentials. Try again or register first.", "error");
+          Swal.fire({
+            title: "Login Failed",
+            text: "Invalid login credentials. Try again or register first.",
+            icon: "error",
+            confirmButtonColor: "#dc2626",
+          });
         } else {
-          Swal.fire("Login Failed", err.message, "error");
+          Swal.fire({
+            title: "Login Failed",
+            text: err.message,
+            icon: "error",
+            confirmButtonColor: "#dc2626",
+          });
         }
       });
 
@@ -52,12 +77,12 @@ const Login = () => {
             <div className="login-for flex-1">
               <form
                 onSubmit={handleSubmit}
-                className="bg-white p-5 flex flex-col gap-8 backdrop-blur-sm bg-opacity-10 shadow-lg rounded-lg"
+                className="bg-white p-5 flex flex-col gap-8 backdrop-blur-sm bg-opacity-10 shadow-lg rounded-lg border border-gray-200 transition-all duration-300 hover:shadow-xl"
               >
                 <div className="flex justify-start items-center">
-                  <BiEnvelope className="text-3xl text-slate-500" />
+                  <BiEnvelope className="text-3xl text-green-600" />
                   <input
-                    className="outline-none flex-1 border-b-2 p-2 bg-transparent focus:border-orange-400 transition-all duration-200"
+                    className="outline-none flex-1 border-b-2 p-2 bg-transparent focus:border-green-500 transition-all duration-200"
                     type="email"
                     name="email"
                     placeholder="enter email"
@@ -66,24 +91,24 @@ const Login = () => {
                 </div>
                 <div className="space-y-1">
                   <div className="flex justify-start items-center">
-                    <BiKey className="text-3xl text-slate-500" />
+                    <BiKey className="text-3xl text-green-600" />
                     <input
-                      className="outline-none flex-1 border-b-2 p-2 bg-transparent focus:border-orange-400 transition-all duration-200"
+                      className="outline-none flex-1 border-b-2 p-2 bg-transparent focus:border-green-500 transition-all duration-200"
                       type="password"
                       name="pass"
                       placeholder="enter Password"
                       required
                     />
                   </div>
-                  <p className="text-end text-[13px] text-slate-500">forgot password?</p>
+                  <p className="text-end text-[13px] text-slate-500 hover:text-green-600 transition-colors duration-300">forgot password?</p>
                 </div>
 
                 <div className="p-1 flex gap-3 -mt-4">
-                  <input type="checkbox" name="remember me" />
+                  <input type="checkbox" name="remember me" className="text-green-600 focus:ring-green-500" />
                   Remember Me
                 </div>
 
-                <input type="submit" value="Login Now" className="btn cursor-pointer" />
+                <input type="submit" value="Login Now" className="btn cursor-pointer bg-green-600 hover:bg-green-700 text-white font-bold py-3 rounded-lg transition-all duration-300 transform hover:-translate-y-0.5 shadow-md hover:shadow-lg" />
               </form>
             </div>
 

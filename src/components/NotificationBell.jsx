@@ -33,19 +33,19 @@ const NotificationBell = () => {
     <div className="flex items-center gap-4">
       {/* Requests Indicator */}
       {pendingRequestsCount > 0 && (
-        <Link to="/dashboard/received-requests" className="relative">
-          <FaInbox className="text-xl text-gray-700 hover:text-gray-900 transition" />
-          <span className="absolute -top-1 -right-1 bg-orange-600 text-white text-xs font-medium rounded-full h-4 w-4 flex items-center justify-center">
+        <Link to="/dashboard/received-requests" className="relative transition-transform duration-300 hover:scale-110">
+          <FaInbox className="text-xl text-green-600 hover:text-green-700 transition" />
+          <span className="absolute -top-1 -right-1 bg-orange-500 text-white text-xs font-medium rounded-full h-4 w-4 flex items-center justify-center animate-pulse">
             {pendingRequestsCount > 9 ? '9+' : pendingRequestsCount}
           </span>
         </Link>
       )}
       
       {/* Notifications Indicator */}
-      <Link to="/notifications" className="relative">
-        <FaBell className="text-xl text-gray-700 hover:text-gray-900 transition" />
+      <Link to="/notifications" className="relative transition-transform duration-300 hover:scale-110">
+        <FaBell className="text-xl text-green-600 hover:text-green-700 transition" />
         {unreadCount > 0 && (
-          <span className="absolute -top-1 -right-1 bg-gray-700 text-white text-xs font-medium rounded-full h-4 w-4 flex items-center justify-center">
+          <span className="absolute -top-1 -right-1 bg-green-600 text-white text-xs font-medium rounded-full h-4 w-4 flex items-center justify-center animate-pulse">
             {unreadCount > 9 ? '9+' : unreadCount}
           </span>
         )}
