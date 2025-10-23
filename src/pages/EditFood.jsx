@@ -64,9 +64,9 @@ const EditFood = () => {
           title: 'Success!',
           text: 'Food updated successfully!',
           icon: 'success',
-          confirmButtonColor: '#16a249',
+          confirmButtonColor: '#16a34a',
         }).then(() => {
-          navigate('/manage-my-food');
+          navigate('/dashboard/manage-foods');
         });
       }
     } catch (error) {
@@ -92,8 +92,8 @@ const EditFood = () => {
         <div className="text-center">
           <h2 className="text-2xl font-bold text-gray-800 mb-4">Food Not Found</h2>
           <button
-            onClick={() => navigate('/manage-my-food')}
-            className="bg-green-600 text-white px-6 py-2 rounded-lg hover:bg-green-700 transition"
+            onClick={() => navigate('/dashboard/manage-foods')}
+            className="bg-green-600 hover:bg-green-700 text-white px-6 py-2 rounded-lg transition-all duration-300 transform hover:-translate-y-0.5 shadow-md hover:shadow-lg"
           >
             Back to My Foods
           </button>
@@ -108,11 +108,11 @@ const EditFood = () => {
         {/* Header */}
         <div className="text-center mb-10">
           <div className="inline-block mb-4">
-            <div className="w-20 h-20 bg-orange-600 rounded-2xl flex items-center justify-center shadow-lg">
+            <div className="w-20 h-20 bg-green-600 rounded-2xl flex items-center justify-center shadow-lg transition-all duration-300 hover:scale-110">
               <FaEdit className="text-white text-4xl" />
             </div>
           </div>
-          <h1 className="text-4xl font-bold text-orange-600 mb-4">
+          <h1 className="text-4xl font-bold text-green-600 mb-4 transition-colors duration-300 hover:text-green-700">
             Edit Food Item
           </h1>
           <p className="text-gray-600 text-lg">Update your shared food details</p>
@@ -121,12 +121,12 @@ const EditFood = () => {
         {/* Form */}
         <form
           onSubmit={handleSubmit}
-          className="bg-white p-8 rounded-xl shadow-md space-y-6 border border-gray-200"
+          className="bg-white p-8 rounded-xl shadow-md space-y-6 border border-gray-200 transition-all duration-300 hover:shadow-lg"
         >
           {/* Food Name */}
           <div className="group">
             <label className="flex items-center gap-2 text-sm font-bold text-gray-700 mb-3">
-              <FaUtensils className="text-orange-600" />
+              <FaUtensils className="text-green-600" />
               Food Name
             </label>
             <input
@@ -135,7 +135,7 @@ const EditFood = () => {
               value={formData.foodName}
               onChange={handleChange}
               placeholder="e.g., Vegetable Soup"
-              className="w-full border-2 border-gray-200 focus:border-orange-500 focus:ring-4 focus:ring-orange-100 rounded-lg px-4 py-3 text-sm transition outline-none group-hover:border-orange-300"
+              className="w-full border-2 border-gray-200 focus:border-green-500 focus:ring-4 focus:ring-green-100 rounded-lg px-4 py-3 text-sm transition-all duration-300 outline-none group-hover:border-green-300 transform hover:-translate-y-0.5"
               required
             />
           </div>
@@ -143,7 +143,7 @@ const EditFood = () => {
           {/* Food Image */}
           <div className="group">
             <label className="flex items-center gap-2 text-sm font-bold text-gray-700 mb-3">
-              <FaCamera className="text-orange-600" />
+              <FaCamera className="text-green-600" />
               Food Image URL
             </label>
             <input
@@ -152,14 +152,14 @@ const EditFood = () => {
               value={formData.foodImage}
               onChange={handleChange}
               placeholder="Enter food image url..."
-              className="w-full border-2 border-gray-200 focus:border-orange-500 focus:ring-4 focus:ring-orange-100 rounded-lg px-4 py-3 text-sm transition outline-none group-hover:border-orange-300"
+              className="w-full border-2 border-gray-200 focus:border-green-500 focus:ring-4 focus:ring-green-100 rounded-lg px-4 py-3 text-sm transition-all duration-300 outline-none group-hover:border-green-300 transform hover:-translate-y-0.5"
               required
             />
             {formData.foodImage && (
               <img
                 src={formData.foodImage}
                 alt="Preview"
-                className="mt-4 w-40 h-40 object-cover rounded-xl border-4 border-orange-100 shadow-md"
+                className="mt-4 w-40 h-40 object-cover rounded-xl border-4 border-green-100 shadow-md transition-transform duration-300 hover:scale-105"
                 onError={(e) => {
                   e.target.style.display = 'none';
                 }}
@@ -171,7 +171,7 @@ const EditFood = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="group">
               <label className="flex items-center gap-2 text-sm font-bold text-gray-700 mb-3">
-                <FaBox className="text-orange-600" />
+                <FaBox className="text-green-600" />
                 Quantity
               </label>
               <input
@@ -181,14 +181,14 @@ const EditFood = () => {
                 onChange={handleChange}
                 min="1"
                 placeholder="e.g., 10"
-                className="w-full border-2 border-gray-200 focus:border-orange-500 focus:ring-4 focus:ring-orange-100 rounded-lg px-4 py-3 text-sm transition outline-none group-hover:border-orange-300"
+                className="w-full border-2 border-gray-200 focus:border-green-500 focus:ring-4 focus:ring-green-100 rounded-lg px-4 py-3 text-sm transition-all duration-300 outline-none group-hover:border-green-300 transform hover:-translate-y-0.5"
                 required
               />
             </div>
 
             <div className="group">
               <label className="flex items-center gap-2 text-sm font-bold text-gray-700 mb-3">
-                <FaCalendarAlt className="text-orange-600" />
+                <FaCalendarAlt className="text-green-600" />
                 Expiration Date
               </label>
               <input
@@ -196,7 +196,7 @@ const EditFood = () => {
                 name="expirationDate"
                 value={formData.expirationDate}
                 onChange={handleChange}
-                className="w-full border-2 border-gray-200 focus:border-orange-500 focus:ring-4 focus:ring-orange-100 rounded-lg px-4 py-3 text-sm transition outline-none group-hover:border-orange-300"
+                className="w-full border-2 border-gray-200 focus:border-green-500 focus:ring-4 focus:ring-green-100 rounded-lg px-4 py-3 text-sm transition-all duration-300 outline-none group-hover:border-green-300 transform hover:-translate-y-0.5"
                 required
               />
             </div>
@@ -205,7 +205,7 @@ const EditFood = () => {
           {/* Pickup Location */}
           <div className="group">
             <label className="flex items-center gap-2 text-sm font-bold text-gray-700 mb-3">
-              <FaMapMarkerAlt className="text-orange-600" />
+              <FaMapMarkerAlt className="text-green-600" />
               Pickup Location
             </label>
             <input
@@ -214,7 +214,7 @@ const EditFood = () => {
               value={formData.location}
               onChange={handleChange}
               placeholder="e.g., 123 Main St, Dhaka"
-              className="w-full border-2 border-gray-200 focus:border-orange-500 focus:ring-4 focus:ring-orange-100 rounded-lg px-4 py-3 text-sm transition outline-none group-hover:border-orange-300"
+              className="w-full border-2 border-gray-200 focus:border-green-500 focus:ring-4 focus:ring-green-100 rounded-lg px-4 py-3 text-sm transition-all duration-300 outline-none group-hover:border-green-300 transform hover:-translate-y-0.5"
               required
             />
           </div>
@@ -222,7 +222,7 @@ const EditFood = () => {
           {/* Notes */}
           <div className="group">
             <label className="flex items-center gap-2 text-sm font-bold text-gray-700 mb-3">
-              <FaStickyNote className="text-orange-600" />
+              <FaStickyNote className="text-green-600" />
               Notes
             </label>
             <textarea
@@ -231,7 +231,7 @@ const EditFood = () => {
               onChange={handleChange}
               placeholder="Optional notes about the food..."
               rows="4"
-              className="w-full border-2 border-gray-200 focus:border-orange-500 focus:ring-4 focus:ring-orange-100 rounded-lg px-4 py-3 text-sm transition outline-none resize-none group-hover:border-orange-300"
+              className="w-full border-2 border-gray-200 focus:border-green-500 focus:ring-4 focus:ring-green-100 rounded-lg px-4 py-3 text-sm transition-all duration-300 outline-none resize-none group-hover:border-green-300 transform hover:-translate-y-0.5"
             />
           </div>
 
@@ -239,8 +239,8 @@ const EditFood = () => {
           <div className="flex gap-4 pt-4">
             <button
               type="button"
-              onClick={() => navigate('/manage-my-food')}
-              className="flex-1 bg-gray-500 hover:bg-gray-600 text-white rounded-lg py-3 text-sm font-semibold transition-colors"
+              onClick={() => navigate('/dashboard/manage-foods')}
+              className="flex-1 bg-gray-500 hover:bg-gray-600 text-white rounded-lg py-3 text-sm font-semibold transition-all duration-300 transform hover:-translate-y-0.5 shadow-md hover:shadow-lg"
               disabled={isSubmitting}
             >
               <FaArrowLeft className="inline mr-2" /> Cancel
@@ -248,7 +248,7 @@ const EditFood = () => {
             <button
               type="submit"
               disabled={isSubmitting}
-              className="flex-1 bg-orange-600 hover:bg-orange-700 text-white rounded-lg py-3 text-sm font-semibold transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+              className="flex-1 bg-green-600 hover:bg-green-700 text-white rounded-lg py-3 text-sm font-semibold transition-all duration-300 transform hover:-translate-y-0.5 shadow-md hover:shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {isSubmitting ? (
                 <span className="flex items-center justify-center gap-2">

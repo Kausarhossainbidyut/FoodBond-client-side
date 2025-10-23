@@ -96,6 +96,7 @@ const Product = () => {
                 object-top      /* image top/center crop */
                 overflow-hidden
                 transition-transform duration-700
+                hover:scale-105
               "
               style={{ backgroundImage: `url(${src})` }}
             />

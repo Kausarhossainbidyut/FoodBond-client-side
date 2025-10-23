@@ -18,8 +18,8 @@ const MyFoodRequest = () => {
       text: "This will make the food available again.",
       icon: 'warning',
       showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
+      confirmButtonColor: '#16a34a',
+      cancelButtonColor: '#dc2626',
       confirmButtonText: 'Yes, cancel it!'
     }).then((result) => {
       if (result.isConfirmed) {
@@ -44,10 +44,10 @@ const MyFoodRequest = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-50 via-pink-50 to-orange-50 px-4 py-8">
+    <div className="min-h-screen bg-gradient-to-br from-green-50 via-green-100 to-green-50 px-4 py-8">
       <div className="max-w-5xl mx-auto">
         <div className="mb-8">
-          <h1 className="text-3xl sm:text-4xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent mb-3">
+          <h1 className="text-3xl sm:text-4xl font-bold bg-gradient-to-r from-green-600 to-green-700 bg-clip-text text-transparent mb-3 transition-colors duration-300 hover:text-green-600">
             🛍️ My Food Requests
           </h1>
           <p className="text-gray-600 text-lg">
@@ -56,10 +56,10 @@ const MyFoodRequest = () => {
         </div>
         
         {foods.length === 0 ? (
-          <div className="bg-white rounded-2xl shadow-xl p-16 text-center">
+          <div className="bg-white rounded-2xl shadow-xl p-16 text-center transition-all duration-300 hover:shadow-2xl">
             <div className="mb-6">
-              <div className="inline-block p-6 bg-gradient-to-br from-purple-100 to-pink-100 rounded-full">
-                <FaShoppingCart className="text-purple-600 text-6xl" />
+              <div className="inline-block p-6 bg-gradient-to-br from-green-100 to-green-200 rounded-full">
+                <FaShoppingCart className="text-green-600 text-6xl" />
               </div>
             </div>
             <h2 className="text-2xl font-bold text-gray-800 mb-3">No requests yet</h2>
@@ -67,7 +67,7 @@ const MyFoodRequest = () => {
               Start browsing available food items to make your first request!
             </p>
             <Link to="/available-food">
-              <button className="bg-gradient-to-r from-purple-600 to-pink-600 text-white font-semibold py-3 px-8 rounded-lg hover:from-purple-700 hover:to-pink-700 transition transform hover:scale-105 shadow-lg">
+              <button className="bg-gradient-to-r from-green-600 to-green-700 text-white font-semibold py-3 px-8 rounded-lg hover:from-green-700 hover:to-green-800 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg">
                 🔍 Browse Available Food
               </button>
             </Link>

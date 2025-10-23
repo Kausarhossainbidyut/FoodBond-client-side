@@ -22,8 +22,8 @@ const Notifications = () => {
       text: 'This will mark all notifications as read',
       icon: 'question',
       showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
+      confirmButtonColor: '#16a34a',
+      cancelButtonColor: '#dc2626',
       confirmButtonText: 'Yes, mark all!'
     }).then((result) => {
       if (result.isConfirmed) {
@@ -39,8 +39,8 @@ const Notifications = () => {
       text: 'This action cannot be undone',
       icon: 'warning',
       showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
+      confirmButtonColor: '#16a34a',
+      cancelButtonColor: '#dc2626',
       confirmButtonText: 'Yes, delete it!'
     }).then((result) => {
       if (result.isConfirmed) {
@@ -55,17 +55,17 @@ const Notifications = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 px-4 py-8">
+    <div className="min-h-screen bg-gradient-to-br from-green-50 via-green-100 to-green-50 px-4 py-8">
       <div className="max-w-4xl mx-auto">
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-8">
-          <h1 className="text-3xl sm:text-4xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent flex items-center gap-3">
-            <FaBell className="text-blue-600" />
+          <h1 className="text-3xl sm:text-4xl font-bold bg-gradient-to-r from-green-600 to-green-700 bg-clip-text text-transparent flex items-center gap-3 transition-colors duration-300 hover:text-green-600">
+            <FaBell className="text-green-600" />
             Notifications
           </h1>
           {notifications && notifications.length > 0 && (
             <button
               onClick={handleMarkAllAsRead}
-              className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-5 py-2.5 rounded-lg hover:from-blue-700 hover:to-purple-700 transition transform hover:scale-105 flex items-center gap-2 font-medium shadow-lg"
+              className="bg-gradient-to-r from-green-600 to-green-700 text-white px-5 py-2.5 rounded-lg hover:from-green-700 hover:to-green-800 transition-all duration-300 transform hover:-translate-y-0.5 flex items-center gap-2 font-medium shadow-lg hover:shadow-xl"
             >
               <FaCheckDouble />
               Mark All as Read
@@ -74,10 +74,10 @@ const Notifications = () => {
         </div>
 
         {!notifications || notifications.length === 0 ? (
-          <div className="bg-white rounded-2xl shadow-xl p-12 text-center">
+          <div className="bg-white rounded-2xl shadow-xl p-12 text-center transition-all duration-300 hover:shadow-2xl">
             <div className="mb-6">
-              <div className="inline-block p-6 bg-gradient-to-br from-blue-100 to-purple-100 rounded-full">
-                <FaBell className="text-blue-600 text-6xl" />
+              <div className="inline-block p-6 bg-gradient-to-br from-green-100 to-green-200 rounded-full">
+                <FaBell className="text-green-600 text-6xl" />
               </div>
             </div>
             <h2 className="text-2xl font-bold text-gray-800 mb-3">No notifications yet</h2>
@@ -88,8 +88,8 @@ const Notifications = () => {
             {notifications.map((notification) => (
               <div
                 key={notification._id}
-                className={`bg-white rounded-xl shadow-md hover:shadow-xl p-5 flex items-start justify-between transition-all duration-300 transform hover:scale-[1.02] ${
-                  !notification.isRead ? 'border-l-4 border-blue-600 bg-gradient-to-r from-blue-50 to-white' : ''
+                className={`bg-white rounded-xl shadow-md hover:shadow-xl p-5 flex items-start justify-between transition-all duration-300 transform hover:-translate-y-1 ${
+                  !notification.isRead ? 'border-l-4 border-green-600 bg-gradient-to-r from-green-50 to-white' : ''
                 }`}
               >
                 <div className="flex-1">
@@ -97,14 +97,14 @@ const Notifications = () => {
                     <span
                       className={`px-3 py-1.5 rounded-full text-xs font-bold ${
                         notification.type === 'food_requested'
-                          ? 'bg-gradient-to-r from-blue-500 to-purple-500 text-white'
+                          ? 'bg-gradient-to-r from-green-500 to-green-600 text-white'
                           : 'bg-gray-200 text-gray-700'
                       }`}
                     >
                       {notification.type === 'food_requested' ? '🍽️ Food Request' : 'ℹ️ Info'}
                     </span>
                     {!notification.isRead && (
-                      <span className="px-3 py-1.5 rounded-full text-xs font-bold bg-gradient-to-r from-red-500 to-pink-500 text-white animate-pulse">
+                      <span className="px-3 py-1.5 rounded-full text-xs font-bold bg-gradient-to-r from-green-500 to-green-600 text-white animate-pulse">
                         ✨ New
                       </span>
                     )}
@@ -120,7 +120,7 @@ const Notifications = () => {
                   {!notification.isRead && (
                     <button
                       onClick={() => handleMarkAsRead(notification._id)}
-                      className="text-green-600 hover:text-white hover:bg-green-600 p-2.5 rounded-lg transition transform hover:scale-110"
+                      className="text-green-600 hover:text-white hover:bg-green-600 p-2.5 rounded-lg transition-all duration-300 transform hover:scale-110"
                       title="Mark as read"
                     >
                       <FaCheck size={18} />
@@ -128,7 +128,7 @@ const Notifications = () => {
                   )}
                   <button
                     onClick={() => handleDelete(notification._id)}
-                    className="text-red-600 hover:text-white hover:bg-red-600 p-2.5 rounded-lg transition transform hover:scale-110"
+                    className="text-red-500 hover:text-white hover:bg-red-500 p-2.5 rounded-lg transition-all duration-300 transform hover:scale-110"
                     title="Delete"
                   >
                     <FaTrash size={18} />

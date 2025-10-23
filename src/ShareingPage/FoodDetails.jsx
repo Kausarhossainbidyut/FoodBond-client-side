@@ -31,6 +31,7 @@ const FoodDetails = () => {
         icon: 'warning',
         title: 'Cannot Request',
         text: 'You cannot request your own food!',
+        confirmButtonColor: '#f59e0b',
         confirmButtonText: 'OK'
       });
       return;
@@ -44,6 +45,7 @@ const FoodDetails = () => {
         icon: 'warning',
         title: 'Invalid Quantity',
         text: 'Please enter a valid quantity (greater than 0)',
+        confirmButtonColor: '#f59e0b',
         confirmButtonText: 'OK'
       });
       return;
@@ -54,6 +56,7 @@ const FoodDetails = () => {
         icon: 'warning',
         title: 'Insufficient Quantity',
         text: `Only ${availableQty} portion(s) available. You requested ${requestQty} portion(s).`,
+        confirmButtonColor: '#f59e0b',
         confirmButtonText: 'OK'
       });
       return;
@@ -64,6 +67,7 @@ const FoodDetails = () => {
         icon: 'warning',
         title: 'Not Available',
         text: 'This food is currently out of stock!',
+        confirmButtonColor: '#f59e0b',
         confirmButtonText: 'OK'
       });
       return;
@@ -77,6 +81,7 @@ const FoodDetails = () => {
             icon: 'success',
             title: 'Request Sent!',
             text: response.message || `Successfully requested ${requestQty} portion(s)!`,
+            confirmButtonColor: '#16a34a',
             confirmButtonText: 'OK'
           }).then(() => {
             window.location.reload();
@@ -88,6 +93,7 @@ const FoodDetails = () => {
             icon: 'error',
             title: 'Request Failed',
             text: error.response?.data?.error || 'Failed to send request. Please try again.',
+            confirmButtonColor: '#dc2626',
             confirmButtonText: 'OK'
           });
         }
@@ -100,49 +106,49 @@ const FoodDetails = () => {
       <div className="max-w-5xl mx-auto">
         <Link
           to={'/available-food'}
-          className="text-[24px] font-bold text-gray-500 flex items-center gap-1 mb-4 hover:text-green-600 transition"
+          className="text-[24px] font-bold text-gray-500 flex items-center gap-1 mb-4 hover:text-green-600 transition-all duration-300"
         >
           <FaArrowLeft className="text-4xl" />Back to Available Foods
         </Link>
 
-        <div className="bg-white rounded-2xl shadow-lg overflow-hidden flex flex-col md:flex-row transition hover:shadow-xl">
+        <div className="bg-white rounded-2xl shadow-lg overflow-hidden flex flex-col md:flex-row transition-all duration-300 hover:shadow-xl">
           <div className="md:w-1/2">
             <img
               src={foodImage}
               alt="foodImage"
-              className="w-full h-[300px] md:h-[400px] bg-cover"
+              className="w-full h-[300px] md:h-[400px] object-cover transition-transform duration-300 hover:scale-105"
             />
           </div>
 
           <div className="md:w-1/2 p-6 flex flex-col justify-between">
             <div>
-              <h1 className="text-2xl font-bold text-gray-800 mb-2">
+              <h1 className="text-2xl font-bold text-gray-800 mb-2 transition-colors duration-300 hover:text-green-600">
                 {foodName}
               </h1>
               <p className="text-sm text-gray-500 mb-4">
-                Donor Name: <span className="font-semibold text-green-700">{donorName}</span>
+                Donor Name: <span className="font-semibold text-green-600">{donorName}</span>
               </p>
               <p className="text-sm text-gray-500 mb-4">
-                Donor Email: <span className="font-semibold text-green-700">{donorEmail}</span>
+                Donor Email: <span className="font-semibold text-green-600">{donorEmail}</span>
               </p>
               <p className="text-sm text-gray-500 mb-4">
-                User Email: <span className="font-semibold text-green-700">{user?.email}</span>
+                User Email: <span className="font-semibold text-green-600">{user?.email}</span>
               </p>
 
               <div className="space-y-3 text-sm text-gray-700">
                 <div className="flex items-center gap-2">
-                  <FaUtensils className="text-gray-600" />
+                  <FaUtensils className="text-green-600" />
                   <span className="font-medium">Available Quantity:</span> 
                   <span className={`font-bold ${parseInt(quantity) === 0 ? 'text-red-600' : 'text-green-600'}`}>
                     {quantity} portion(s)
                   </span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <FaMapMarkerAlt className="text-gray-600" />
+                  <FaMapMarkerAlt className="text-green-600" />
                   <span className="font-medium">Pickup Location:</span> {location}
                 </div>
                 <div className="flex items-center gap-2">
-                  <FaCalendarAlt className="text-gray-600" />
+                  <FaCalendarAlt className="text-green-600" />
                   <span className="font-medium">Expires:</span> {expirationDate}
                 </div>
               </div>
@@ -154,7 +160,7 @@ const FoodDetails = () => {
                 <div className="flex items-center gap-3">
                   <button
                     onClick={() => setRequestedQuantity(Math.max(1, requestedQuantity - 1))}
-                    className="bg-gray-200 hover:bg-gray-300 text-gray-700 font-bold py-2 px-4 rounded"
+                    className="bg-green-100 hover:bg-green-200 text-green-700 font-bold py-2 px-4 rounded-lg transition-all duration-300 transform hover:-translate-y-0.5 shadow-sm hover:shadow-md"
                     type="button"
                   >
                     −
@@ -165,11 +171,11 @@ const FoodDetails = () => {
                     max={quantity}
                     value={requestedQuantity}
                     onChange={(e) => setRequestedQuantity(Math.max(1, parseInt(e.target.value) || 1))}
-                    className="input w-20 border rounded text-center font-bold text-lg"
+                    className="input w-20 border border-green-300 rounded-lg text-center font-bold text-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-all duration-300"
                   />
                   <button
                     onClick={() => setRequestedQuantity(Math.min(parseInt(quantity), requestedQuantity + 1))}
-                    className="bg-gray-200 hover:bg-gray-300 text-gray-700 font-bold py-2 px-4 rounded"
+                    className="bg-green-100 hover:bg-green-200 text-green-700 font-bold py-2 px-4 rounded-lg transition-all duration-300 transform hover:-translate-y-0.5 shadow-sm hover:shadow-md"
                     type="button"
                   >
                     +
@@ -185,7 +191,7 @@ const FoodDetails = () => {
                   Additional Notes
                 </h2>
                 <textarea
-                  className="textarea w-full border rounded p-2"
+                  className="textarea w-full border border-gray-300 rounded-lg p-3 focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-all duration-300"
                   value={userNote}
                   onChange={(e) => setUserNote(e.target.value)}
                   placeholder="Write your own note (optional)..."
@@ -196,7 +202,7 @@ const FoodDetails = () => {
             <button
               onClick={handleRequest}
               disabled={parseInt(quantity) === 0}
-              className={`mt-6 font-medium py-2 px-4 rounded-lg w-full md:w-auto transition ${
+              className={`mt-6 font-medium py-3 px-6 rounded-lg w-full md:w-auto transition-all duration-300 transform hover:-translate-y-0.5 shadow-md hover:shadow-lg ${
                 parseInt(quantity) === 0
                   ? 'bg-gray-400 cursor-not-allowed text-gray-700'
                   : 'bg-green-600 hover:bg-green-700 text-white'

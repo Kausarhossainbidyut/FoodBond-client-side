@@ -18,8 +18,8 @@ const MyReceivedRequests = () => {
       text: `Are you sure you want to ${statusText} this request?`,
       icon: 'question',
       showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
+      confirmButtonColor: '#16a34a',
+      cancelButtonColor: '#dc2626',
       confirmButtonText: `Yes, ${statusText} it!`
     }).then((result) => {
       if (result.isConfirmed) {
@@ -57,7 +57,7 @@ const MyReceivedRequests = () => {
     <div className="min-h-screen bg-gray-50 px-4 py-8">
       <div className="max-w-5xl mx-auto">
         <div className="mb-8">
-          <h1 className="text-3xl sm:text-4xl font-bold text-gray-800 mb-3 flex items-center gap-3">
+          <h1 className="text-3xl sm:text-4xl font-bold text-gray-800 mb-3 flex items-center gap-3 transition-colors duration-300 hover:text-green-600">
             <FaInbox className="text-green-600" />
             Received Requests
           </h1>
@@ -67,7 +67,7 @@ const MyReceivedRequests = () => {
         </div>
         
         {requests.length === 0 ? (
-          <div className="bg-white rounded-2xl shadow p-16 text-center border border-gray-200">
+          <div className="bg-white rounded-2xl shadow p-16 text-center border border-gray-200 transition-all duration-300 hover:shadow-lg">
             <div className="mb-6">
               <div className="inline-block p-6 bg-gray-100 rounded-full">
                 <FaInbox className="text-gray-400 text-6xl" />
@@ -84,15 +84,15 @@ const MyReceivedRequests = () => {
             {pendingRequests.length > 0 && (
               <div>
                 <h2 className="text-2xl font-bold text-gray-800 mb-4 flex items-center gap-2">
-                  <FaClipboardList className="text-orange-600" />
+                  <FaClipboardList className="text-orange-500" />
                   Pending Requests ({pendingRequests.length})
                 </h2>
                 <div className="space-y-4">
                   {pendingRequests.map((request) => (
-                    <div key={request._id} className="bg-white rounded-xl shadow p-5 border-l-4 border-orange-600">
+                    <div key={request._id} className="bg-white rounded-xl shadow p-5 border-l-4 border-orange-500 transition-all duration-300 hover:shadow-lg">
                       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
                         <div className="flex-1">
-                          <h3 className="text-xl font-bold text-gray-800">{request.foodName}</h3>
+                          <h3 className="text-xl font-bold text-gray-800 transition-colors duration-300 hover:text-green-600">{request.foodName}</h3>
                           <p className="text-gray-600">Requested by: {request.requesterEmail}</p>
                           <p className="text-gray-600">Quantity: {request.requestedQuantity} portion(s)</p>
                           <p className="text-sm text-gray-500">
@@ -102,13 +102,13 @@ const MyReceivedRequests = () => {
                         <div className="flex gap-2">
                           <button
                             onClick={() => handleUpdateStatus(request._id, 'accepted')}
-                            className="flex items-center gap-2 px-4 py-2 rounded-lg bg-green-600 hover:bg-green-700 text-white text-sm font-semibold transition"
+                            className="flex items-center gap-2 px-4 py-2 rounded-lg bg-green-600 hover:bg-green-700 text-white text-sm font-semibold transition-all duration-300 transform hover:-translate-y-0.5 shadow-md hover:shadow-lg"
                           >
                             <FaCheck /> Accept
                           </button>
                           <button
                             onClick={() => handleUpdateStatus(request._id, 'rejected')}
-                            className="flex items-center gap-2 px-4 py-2 rounded-lg bg-red-600 hover:bg-red-700 text-white text-sm font-semibold transition"
+                            className="flex items-center gap-2 px-4 py-2 rounded-lg bg-red-500 hover:bg-red-600 text-white text-sm font-semibold transition-all duration-300 transform hover:-translate-y-0.5 shadow-md hover:shadow-lg"
                           >
                             <FaTimes /> Reject
                           </button>
@@ -129,10 +129,10 @@ const MyReceivedRequests = () => {
                 </h2>
                 <div className="space-y-4">
                   {acceptedRequests.map((request) => (
-                    <div key={request._id} className="bg-white rounded-xl shadow p-5 border-l-4 border-green-600">
+                    <div key={request._id} className="bg-white rounded-xl shadow p-5 border-l-4 border-green-600 transition-all duration-300 hover:shadow-lg">
                       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
                         <div className="flex-1">
-                          <h3 className="text-xl font-bold text-gray-800">{request.foodName}</h3>
+                          <h3 className="text-xl font-bold text-gray-800 transition-colors duration-300 hover:text-green-600">{request.foodName}</h3>
                           <p className="text-gray-600">Requested by: {request.requesterEmail}</p>
                           <p className="text-gray-600">Quantity: {request.requestedQuantity} portion(s)</p>
                           <p className="text-sm text-gray-500">
@@ -141,7 +141,7 @@ const MyReceivedRequests = () => {
                         </div>
                         <button
                           onClick={() => handleUpdateStatus(request._id, 'completed')}
-                          className="flex items-center gap-2 px-4 py-2 rounded-lg bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold transition"
+                          className="flex items-center gap-2 px-4 py-2 rounded-lg bg-blue-500 hover:bg-blue-600 text-white text-sm font-semibold transition-all duration-300 transform hover:-translate-y-0.5 shadow-md hover:shadow-lg"
                         >
                           Mark as Completed
                         </button>
@@ -156,15 +156,15 @@ const MyReceivedRequests = () => {
             {rejectedRequests.length > 0 && (
               <div>
                 <h2 className="text-2xl font-bold text-gray-800 mb-4 flex items-center gap-2">
-                  <FaTimes className="text-red-600" />
+                  <FaTimes className="text-red-500" />
                   Rejected Requests ({rejectedRequests.length})
                 </h2>
                 <div className="space-y-4">
                   {rejectedRequests.map((request) => (
-                    <div key={request._id} className="bg-white rounded-xl shadow p-5 border-l-4 border-red-600">
+                    <div key={request._id} className="bg-white rounded-xl shadow p-5 border-l-4 border-red-500 transition-all duration-300 hover:shadow-lg">
                       <div className="flex items-center justify-between">
                         <div>
-                          <h3 className="text-xl font-bold text-gray-800">{request.foodName}</h3>
+                          <h3 className="text-xl font-bold text-gray-800 transition-colors duration-300 hover:text-green-600">{request.foodName}</h3>
                           <p className="text-gray-600">Requested by: {request.requesterEmail}</p>
                           <p className="text-gray-600">Quantity: {request.requestedQuantity} portion(s)</p>
                           <p className="text-sm text-gray-500">
@@ -182,15 +182,15 @@ const MyReceivedRequests = () => {
             {completedRequests.length > 0 && (
               <div>
                 <h2 className="text-2xl font-bold text-gray-800 mb-4 flex items-center gap-2">
-                  <FaCheck className="text-blue-600" />
+                  <FaCheck className="text-blue-500" />
                   Completed Requests ({completedRequests.length})
                 </h2>
                 <div className="space-y-4">
                   {completedRequests.map((request) => (
-                    <div key={request._id} className="bg-white rounded-xl shadow p-5 border-l-4 border-blue-600">
+                    <div key={request._id} className="bg-white rounded-xl shadow p-5 border-l-4 border-blue-500 transition-all duration-300 hover:shadow-lg">
                       <div className="flex items-center justify-between">
                         <div>
-                          <h3 className="text-xl font-bold text-gray-800">{request.foodName}</h3>
+                          <h3 className="text-xl font-bold text-gray-800 transition-colors duration-300 hover:text-green-600">{request.foodName}</h3>
                           <p className="text-gray-600">Requested by: {request.requesterEmail}</p>
                           <p className="text-gray-600">Quantity: {request.requestedQuantity} portion(s)</p>
                           <p className="text-sm text-gray-500">

@@ -11,7 +11,6 @@ const Card1 = ({ food = {} }) => {
     quantity,
     expirationDate,
     location,
-    notes,
     donorName,
     donorImage,
     status,
@@ -21,81 +20,97 @@ const Card1 = ({ food = {} }) => {
   const fallbackDonorImage = "https://ui-avatars.com/api/?name=User&background=random";
 
   const [loaded, setLoaded] = useState(false);
+  const [imageError, setImageError] = useState(false);
+
+  // Parse quantity as integer
+  const quantityNum = parseInt(quantity) || 0;
+  const isAvailable = status === 'available' && quantityNum > 0;
 
   return (
-    <div className="bg-white border border-gray-300 rounded overflow-hidden">
+    <div className="bg-white border border-gray-200 rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1">
       {/* Food Image */}
-      <div className="h-40 bg-gray-100 overflow-hidden">
-        <img
-          src={foodImage || fallbackFoodImage}
-          alt={foodName || "Food"}
-          onLoad={() => setLoaded(true)}
-          onError={(e) => (e.target.src = fallbackFoodImage)}
-          className={`w-full h-full object-cover ${loaded ? "opacity-100" : "opacity-0"}`}
-        />
+      <div className="h-48 bg-gray-100 overflow-hidden relative">
+        {!imageError ? (
+          <img
+            src={foodImage || fallbackFoodImage}
+            alt={foodName || "Food"}
+            onLoad={() => setLoaded(true)}
+            onError={() => setImageError(true)}
+            className={`w-full h-full object-cover transition-opacity duration-500 ${loaded ? "opacity-100" : "opacity-0"}`}
+          />
+        ) : (
+          <div className="w-full h-full bg-gradient-to-br from-gray-50 to-gray-100 flex items-center justify-center">
+            <div className="text-center">
+              <div className="w-12 h-12 bg-gray-200 rounded-full flex items-center justify-center mx-auto mb-2">
+                <CiClock1 className="text-gray-500 text-xl" />
+              </div>
+              <p className="text-gray-500 text-sm">Image not available</p>
+            </div>
+          </div>
+        )}
+        
+        {/* Availability Badge */}
+        <div className="absolute top-3 right-3">
+          <span className={`px-3 py-1 rounded-full text-xs font-semibold transition-all duration-300 ${
+            isAvailable 
+              ? quantityNum <= 3 
+                ? 'bg-orange-100 text-orange-800 border border-orange-200' 
+                : 'bg-green-100 text-green-800 border border-green-200'
+              : 'bg-gray-100 text-gray-500 border border-gray-200'
+          }`}>
+            {isAvailable 
+              ? quantityNum <= 3 
+                ? `${quantityNum} left` 
+                : `${quantityNum}`
+              : 'Unavailable'
+            }
+          </span>
+        </div>
       </div>
 
       {/* Card Content */}
-      <div className="p-3">
-        {/* Badges */}
-        <div className="flex justify-between items-start mb-2">
-          <span className={`text-white text-xs font-medium px-2 py-1 rounded ${
-            parseInt(quantity) === 0 ? 'bg-gray-500' :
-            status === 'available' ? 'bg-gray-700' : 'bg-gray-600'
-          }`}>
-            {parseInt(quantity) === 0 ? 'Unavailable' : 'Available'}
-          </span>
-          
-          <span className={`text-white text-xs font-medium px-2 py-1 rounded ${
-            parseInt(quantity) === 0 ? 'bg-gray-500' : 
-            parseInt(quantity) <= 3 ? 'bg-gray-600' : 
-            'bg-gray-700'
-          }`}>
-            {quantity || 0} left
-          </span>
-        </div>
-
+      <div className="p-4">
         {/* Food Name */}
-        <h3 className="text-base font-medium text-gray-800 mb-2 line-clamp-1">
+        <h3 className="text-base font-bold text-gray-800 mb-3 line-clamp-1">
           {foodName || "Unknown Food"}
         </h3>
 
         {/* Donor Info */}
-        <div className="flex items-center gap-2 mb-2 pb-2 border-b border-gray-200">
+        <div className="flex items-center gap-3 mb-3 pb-3 border-b border-gray-100">
           <img
             src={donorImage || fallbackDonorImage}
             alt={donorName || "Donor"}
             onError={(e) => (e.target.src = fallbackDonorImage)}
-            className="w-7 h-7 rounded-full object-cover border border-gray-300"
+            className="w-10 h-10 rounded-full object-cover border-2 border-green-100 transition-transform duration-300 hover:scale-110"
           />
           <div className="flex-1 min-w-0">
-            <p className="text-sm text-gray-800 truncate">
+            <p className="text-sm font-semibold text-gray-800 truncate">
               {donorName || "Anonymous"}
             </p>
-            <div className="flex items-center text-xs text-gray-500">
-              <IoLocationOutline size={12} className="mr-1" />
+            <div className="flex items-center text-xs text-gray-500 mt-1">
+              <IoLocationOutline size={12} className="mr-1 flex-shrink-0" />
               <span className="truncate">{location || "Unknown"}</span>
             </div>
           </div>
         </div>
 
         {/* Expiration Date */}
-        <div className="flex items-center text-sm text-gray-600 mb-3">
-          <CiClock1 size={14} className="mr-1" />
+        <div className="flex items-center text-sm text-gray-600 mb-4">
+          <CiClock1 size={14} className="mr-2 text-gray-500 flex-shrink-0" />
           <span>Expires: {expirationDate || "N/A"}</span>
         </div>
 
         {/* View Details Button */}
         <Link to={`/food-details/${_id}`}>
           <button 
-            disabled={parseInt(quantity) === 0}
-            className={`w-full py-1.5 rounded text-sm ${
-              parseInt(quantity) === 0
-                ? 'bg-gray-200 text-gray-500 cursor-not-allowed'
-                : 'bg-gray-800 hover:bg-gray-900 text-white'
+            disabled={!isAvailable}
+            className={`w-full py-2.5 rounded-lg text-sm font-semibold transition-all duration-300 transform hover:scale-[1.02] ${
+              isAvailable
+                ? 'bg-green-600 hover:bg-green-700 text-white shadow-sm hover:shadow-md'
+                : 'bg-gray-100 text-gray-400 cursor-not-allowed'
             }`}
           >
-            {parseInt(quantity) === 0 ? 'Out of Stock' : 'View Details'}
+            {!isAvailable ? 'Out of Stock' : 'View Details'}
           </button>
         </Link>
       </div>
