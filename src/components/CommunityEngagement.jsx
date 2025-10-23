@@ -48,7 +48,7 @@ const CommunityEngagement = () => {
   }, []);
 
   return (
-    <section className="py-16 bg-white">
+    <section className="py-16 bg-gradient-to-br from-white to-green-50">
       <div className="max-w-7xl mx-auto px-4">
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-3">
@@ -61,12 +61,12 @@ const CommunityEngagement = () => {
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {/* Engagement Stats */}
-          <div className="lg:col-span-1 bg-gradient-to-br from-green-50 to-green-100 rounded-2xl p-6 shadow-lg">
-            <h3 className="text-xl font-bold text-gray-800 mb-6">Live Stats</h3>
-            <div className="space-y-6">
-              <div className="flex items-center justify-between p-4 bg-white rounded-xl shadow-sm">
+          <div className="lg:col-span-1 bg-white rounded-2xl p-6 shadow-lg border border-green-100">
+            <h3 className="text-xl font-bold text-gray-800 mb-6">Live Community Stats</h3>
+            <div className="space-y-5">
+              <div className="flex items-center justify-between p-4 bg-green-50 rounded-xl">
                 <div className="flex items-center gap-3">
-                  <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center">
+                  <div className="w-12 h-12 bg-white rounded-lg flex items-center justify-center shadow-sm">
                     <FaUsers className="text-green-600 text-xl" />
                   </div>
                   <div>
@@ -79,9 +79,9 @@ const CommunityEngagement = () => {
                 <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>
               </div>
 
-              <div className="flex items-center justify-between p-4 bg-white rounded-xl shadow-sm">
+              <div className="flex items-center justify-between p-4 bg-green-50 rounded-xl">
                 <div className="flex items-center gap-3">
-                  <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center">
+                  <div className="w-12 h-12 bg-white rounded-lg flex items-center justify-center shadow-sm">
                     <FaUtensils className="text-green-600 text-xl" />
                   </div>
                   <div>
@@ -94,9 +94,9 @@ const CommunityEngagement = () => {
                 <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>
               </div>
 
-              <div className="flex items-center justify-between p-4 bg-white rounded-xl shadow-sm">
+              <div className="flex items-center justify-between p-4 bg-green-50 rounded-xl">
                 <div className="flex items-center gap-3">
-                  <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center">
+                  <div className="w-12 h-12 bg-white rounded-lg flex items-center justify-center shadow-sm">
                     <FaHandsHelping className="text-green-600 text-xl" />
                   </div>
                   <div>
@@ -109,9 +109,9 @@ const CommunityEngagement = () => {
                 <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>
               </div>
 
-              <div className="flex items-center justify-between p-4 bg-white rounded-xl shadow-sm">
+              <div className="flex items-center justify-between p-4 bg-green-50 rounded-xl">
                 <div className="flex items-center gap-3">
-                  <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center">
+                  <div className="w-12 h-12 bg-white rounded-lg flex items-center justify-center shadow-sm">
                     <FaComments className="text-green-600 text-xl" />
                   </div>
                   <div>
@@ -125,7 +125,7 @@ const CommunityEngagement = () => {
               </div>
             </div>
 
-            <div className="mt-8 p-4 bg-green-600 rounded-xl text-white text-center">
+            <div className="mt-6 p-4 bg-gradient-to-r from-green-500 to-green-600 rounded-xl text-white text-center">
               <p className="font-bold">Join our growing community!</p>
               <p className="text-sm text-green-100 mt-1">
                 Be part of the solution to food waste
@@ -135,13 +135,13 @@ const CommunityEngagement = () => {
 
           {/* Recent Activity */}
           <div className="lg:col-span-2">
-            <div className="bg-gradient-to-br from-green-50 to-green-100 rounded-2xl p-6 shadow-lg h-full">
-              <h3 className="text-xl font-bold text-gray-800 mb-6">Recent Activity</h3>
+            <div className="bg-white rounded-2xl p-6 shadow-lg h-full border border-green-100">
+              <h3 className="text-xl font-bold text-gray-800 mb-6">Recent Community Activity</h3>
               <div className="space-y-4">
                 {recentActivity.map((activity) => (
                   <div 
                     key={activity.id} 
-                    className="bg-white p-4 rounded-xl shadow-sm border border-green-100 animate-fade-in"
+                    className="bg-gray-50 p-4 rounded-xl border border-gray-100 hover:border-green-200 transition-colors duration-300"
                   >
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-3">
@@ -181,7 +181,7 @@ const CommunityEngagement = () => {
                           <p className="text-sm text-gray-600">{activity.action}</p>
                         </div>
                       </div>
-                      <div className="text-xs text-gray-500 bg-gray-100 px-2 py-1 rounded-full">
+                      <div className="text-xs text-gray-500 bg-white px-2 py-1 rounded-full shadow-sm">
                         {activity.time}
                       </div>
                     </div>
@@ -190,7 +190,7 @@ const CommunityEngagement = () => {
               </div>
 
               <div className="mt-6 text-center">
-                <button className="bg-green-600 hover:bg-green-700 text-white font-medium py-2 px-6 rounded-lg transition-all duration-300 transform hover:-translate-y-0.5 shadow-md hover:shadow-lg">
+                <button className="bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white font-medium py-2.5 px-6 rounded-lg transition-all duration-300 shadow-md hover:shadow-lg">
                   View All Activity
                 </button>
               </div>

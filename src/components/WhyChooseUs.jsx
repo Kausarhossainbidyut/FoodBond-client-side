@@ -4,52 +4,52 @@ import { FaMobileAlt, FaLeaf, FaShieldAlt, FaHeart, FaClock, FaBell } from 'reac
 const WhyChooseUs = () => {
   const features = [
     {
-      icon: <FaLeaf className="text-3xl" />,
+      icon: <FaLeaf className="text-xl" />,
       title: 'Reduce Food Waste',
-      description: 'Share surplus food instead of throwing it away.',
-      color: 'bg-green-600'
+      description: 'Share surplus food instead of throwing it away and help create a sustainable community.',
+      color: 'bg-green-100 text-green-600'
     },
     {
-      icon: <FaHeart className="text-3xl" />,
+      icon: <FaHeart className="text-xl" />,
       title: 'Feed the Hungry',
-      description: 'Help those in need by sharing your extra food.',
-      color: 'bg-orange-600'
+      description: 'Help those in need by sharing your extra food and making a positive impact.',
+      color: 'bg-orange-100 text-orange-500'
     },
     {
-      icon: <FaMobileAlt className="text-3xl" />,
+      icon: <FaMobileAlt className="text-xl" />,
       title: 'Easy to Use',
-      description: 'Simple interface - share food in just a few clicks.',
-      color: 'bg-green-600'
+      description: 'Simple interface - share food in just a few clicks with our intuitive platform.',
+      color: 'bg-green-100 text-green-600'
     },
     {
-      icon: <FaShieldAlt className="text-3xl" />,
+      icon: <FaShieldAlt className="text-xl" />,
       title: 'Safe & Verified',
-      description: 'All users are verified. Your safety is our priority.',
-      color: 'bg-gray-700'
+      description: 'All users are verified. Your safety and privacy are our top priorities.',
+      color: 'bg-gray-100 text-gray-700'
     },
     {
-      icon: <FaClock className="text-3xl" />,
+      icon: <FaClock className="text-xl" />,
       title: 'Available 24/7',
-      description: 'Share and request food anytime.',
-      color: 'bg-orange-600'
+      description: 'Share and request food anytime with our round-the-clock platform access.',
+      color: 'bg-orange-100 text-orange-500'
     },
     {
-      icon: <FaBell className="text-3xl" />,
+      icon: <FaBell className="text-xl" />,
       title: 'Instant Notifications',
-      description: 'Get notified when food is shared or requested.',
-      color: 'bg-green-600'
+      description: 'Get notified when food is shared or requested to ensure timely connections.',
+      color: 'bg-green-100 text-green-600'
     },
   ];
 
   return (
-    <section className="py-16 bg-gray-50">
+    <section className="py-16 bg-gradient-to-br from-white to-green-50">
       <div className="max-w-7xl mx-auto px-4">
         <div className="text-center mb-12">
-          <h2 className="text-4xl font-bold text-green-600 mb-3">
-            Why Share Food?
+          <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-3">
+            Why Choose Our Platform?
           </h2>
-          <p className="text-lg text-gray-600">
-            A simple platform for sharing surplus food and helping your community
+          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+            A simple yet powerful platform for sharing surplus food and helping your community thrive
           </p>
         </div>
 
@@ -57,12 +57,12 @@ const WhyChooseUs = () => {
           {features.map((feature, index) => (
             <div
               key={index}
-              className="bg-white rounded-lg p-6 border border-gray-200 hover:border-gray-300 transition-colors"
+              className="bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition-all duration-300 border border-green-50"
             >
-              <div className={`w-14 h-14 ${feature.color} rounded-lg flex items-center justify-center mb-4 shadow-sm`}>
-                <span className="text-white">{feature.icon}</span>
+              <div className={`w-12 h-12 ${feature.color} rounded-lg flex items-center justify-center mb-4`}>
+                {feature.icon}
               </div>
-              <h3 className="text-xl font-bold text-gray-800 mb-2">
+              <h3 className="text-xl font-bold text-gray-800 mb-3">
                 {feature.title}
               </h3>
               <p className="text-gray-600 leading-relaxed">
