@@ -2,10 +2,10 @@
 // Backend server URL - change this based on your environment
 
 // For local development
-export const API_URL = 'http://localhost:5000';
+// export const API_URL = 'http://localhost:5000';
 
 // For production (Vercel deployment)
-// export const API_URL = 'https://mission-scic-assignment.vercel.app';
+export const API_URL = 'https://food-bond-server-side.vercel.app';
 
 // API endpoints
 export const API_ENDPOINTS = {
